@@ -139,7 +139,7 @@ public abstract class CursachDatabase extends RoomDatabase {
                     "('003301', 'Чупракова', 'Любовь', 'Алексеевна', 'Прокурор', 'Генерал-лейтенант юстиции', '4956574461', 2, 3, '$2y$10$cOiD6niljyoijY8rvCc7Huq9Ia11rFaA0Gwq82VVwWkcGMja3Cz46', 'chuprakova_love')," +
                     "('004401', 'Теплухин', 'Павел', 'Игнатьевич', 'Оперуполномоченный', 'Капитан внутренней службы', '4957714440', 1, 4, '$2y$10$uaRQAl8weA4dbAHwJmWMduLOG5T6S1HBQKYO.wIsbO48ZwPSmGsYm', 'teplukhin_pavel')," +
                     "('005501', 'Райков', 'Александр', 'Егорович', 'Следователь', 'Подполковник юстиции', '4958118915', 3, 5, '$2y$10$ZYRwoSza5nI4ybgdcO6ca.QWPoDMRcytA23G/IC3fkEaTljRQwEAa', 'raikov_aleksander')," +
-                    "('777777', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', null, null, '$2y$10$kJPQdmJ32Mm5t37njmCWh.DZJCa/fUouUfx0T2ir1uOszLN1nOGx2 ', 'kotik_igor')");
+                    "('777777', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 0, 0, '$2y$10$kJPQdmJ32Mm5t37njmCWh.DZJCa/fUouUfx0T2ir1uOszLN1nOGx2 ', 'kotik_igor')");
             db.execSQL("INSERT INTO Statement VALUES" +
                     "(101, '2021-03-03', 'Рост: 170-175, среднего телосложения, волосы светлые, на вид 40-45 лет. Губы тонкие, на верхней челюсти золотой зуб.', 1, '001101')," +
                     "(102, '2021-03-10', 'Рост: 180-185, худощавого телосложения, волосы русые, подбородок квадратной формы. На правой ноге на голени большой синяк.', 2, '002201')," +

@@ -65,6 +65,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.victimButton:
                 Intent intent = new Intent(MenuActivity.this, VictimActivity.class);
+                intent.putExtra("currentUser", (chooseRoleId == 2 ? currentUserJudge : currentUserEmpl));
+                intent.putExtra("roleId", chooseRoleId);
                 intent.putExtra("isDutyOfficer", isDutyOfficer());
                 startActivity(intent);
                 break;

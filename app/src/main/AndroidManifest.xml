@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestProject">
-        <activity android:name=".VictimActivity"></activity>
+        <activity android:name=".CurrentVictimActivity"></activity>
+        <activity android:name=".VictimActivity" />
         <activity android:name=".MenuActivity" />
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld

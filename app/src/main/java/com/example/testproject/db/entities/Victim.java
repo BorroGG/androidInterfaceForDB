@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 import lombok.Data;
 
 
 @Entity
 @Data
-public class Victim {
+public class Victim implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     @NonNull
