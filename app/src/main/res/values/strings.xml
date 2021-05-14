@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">TestProject</string>
+    <string name="helloStr">Добро пожаловать!</string>
+    <string name="plsEnter">Войдите или зарегистрируйтесь</string>
+    <string name="login">Логин</string>
+    <string name="pass">Пароль</string>
+    <string name="enter">Войти</string>
+    <string name="reg">Зарегистрироваться</string>
+
+    <string name="register">Регистрация</string>
+    <string name="idUser">Ваш номер(id)</string>
+    <string name="surname">Фамилия</string>
+    <string name="name">Имя</string>
+    <string name="middleName">Отчество</string>
+    <string name="position">Должность</string>
+    <string name="rank">Звание</string>
+    <string name="phone">Служебный телефон</string>
+    <string name="acceptReg">Принять</string>
+
+    <string name="exit">Выйти</string>
+    <string name="mainMenu">Главное меню</string>
+    <string name="victim">Потерпевшие</string>
+    <string name="statement">Заявления</string>
+    <string name="organ_employee">Сотрудники органов</string>
+    <string name="criminal_case">Уголовные дела</string>
+    <string name="accused">Обвиняемые</string>
+    <string name="sentence">Приговоры</string>
+    <string name="period">Период рассмотрения дела</string>
+
+    <string name="addVictim">Добавить потерпевшего</string>
+
+    <string name="title_activity_register">RegisterActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+</resources>

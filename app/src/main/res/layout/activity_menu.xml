@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".MenuActivity">
+
+    <LinearLayout
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+    <TextView
+        android:id="@+id/userNameText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="start"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/exitText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="@string/exit"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/mainMenuText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mainMenu"
+        android:layout_below="@+id/line"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <Button
+        android:id="@+id/victimButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/victim"
+        android:layout_below="@+id/mainMenuText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/statementButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/statement"
+        android:layout_below="@+id/victimButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/organ_employee"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/organ_employee"
+        android:layout_below="@+id/statementButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/criminal_case"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/criminal_case"
+        android:layout_below="@+id/organ_employee"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/accused"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/accused"
+        android:layout_below="@+id/criminal_case"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/sentence"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sentence"
+        android:layout_below="@+id/accused"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/period"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/period"
+        android:layout_below="@+id/sentence"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+</RelativeLayout>
