@@ -28,6 +28,18 @@
     <string name="period">Период рассмотрения дела</string>
 
     <string name="addVictim">Добавить потерпевшего</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Удалить</string>
+    <string name="birthday">Дата рождения</string>
+    <string name="passport">Паспорт</string>
+    <string name="citizenship">Гражданство</string>
+    <string name="social_status">Социальное положение</string>
+    <string name="official_position">Должностное положение</string>
+    <string name="phoneCommon">Телефон</string>
+
+    <string name="addStatement">Добавить заявление</string>
+    <string name="addingVictim">Добавление потерпевшего</string>
+
 
     <string name="title_activity_register">RegisterActivity</string>
     <!--

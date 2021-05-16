@@ -11,11 +11,9 @@ import android.widget.TextView;
 import com.example.testproject.db.entities.Judge;
 import com.example.testproject.db.entities.Organ_employee;
 
-public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
+import java.sql.Statement;
 
-    int chooseRoleId = 0;
-    Organ_employee currentUserEmpl = null;
-    Judge currentUserJudge = null;
+public class MenuActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvUserName, tvExit;
     Button btnVictim, btnStatement, btnOrganEmployee, btnCriminalCase, btnAccused, btnSentence, btnPeriod;
@@ -24,13 +22,6 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        Bundle arguments = getIntent().getExtras();
-        chooseRoleId = Integer.parseInt(arguments.get("roleId").toString());
-        if (chooseRoleId == 2) {
-            currentUserJudge = (Judge) arguments.getSerializable("currentUser");
-        } else {
-            currentUserEmpl = (Organ_employee) arguments.getSerializable("currentUser");
-        }
 
         tvUserName = findViewById(R.id.userNameText);
         tvExit = findViewById(R.id.exitText);
@@ -41,7 +32,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         btnCriminalCase = findViewById(R.id.criminal_case);
         btnAccused = findViewById(R.id.accused);
         btnSentence = findViewById(R.id.sentence);
-        btnSentence.setVisibility(chooseRoleId == 1 ? View.GONE : View.VISIBLE);
+        btnSentence.setVisibility(UserData.ROLE_ID == 1 ? View.GONE : View.VISIBLE);
         btnPeriod = findViewById(R.id.period);
         btnVictim.setOnClickListener(this);
         btnStatement.setOnClickListener(this);
@@ -55,8 +46,8 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(MenuActivity.this, MainActivity.class);
             startActivity(intent);
         });
-        String userNameText = "Вы вошли как: " + (chooseRoleId == 2 ? currentUserJudge.login : currentUserEmpl.login);
-        tvUserName.setText(userNameText);
+
+        tvUserName.setText(UserData.getYouLogAs());
     }
 
     @Override
@@ -64,14 +55,12 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
             case R.id.victimButton:
-                Intent intent = new Intent(MenuActivity.this, VictimActivity.class);
-                intent.putExtra("currentUser", (chooseRoleId == 2 ? currentUserJudge : currentUserEmpl));
-                intent.putExtra("roleId", chooseRoleId);
-                intent.putExtra("isDutyOfficer", isDutyOfficer());
-                startActivity(intent);
+                Intent intentVictim = new Intent(MenuActivity.this, VictimActivity.class);
+                startActivity(intentVictim);
                 break;
             case R.id.statementButton:
-                System.out.println("statementButton");
+                Intent intentStatement = new Intent(MenuActivity.this, StatementActivity.class);
+                startActivity(intentStatement);
                 break;
             case R.id.organ_employee:
                 System.out.println("organ_employee");
@@ -90,11 +79,5 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
         }
-    }
-
-    private boolean isDutyOfficer() {
-        if (chooseRoleId == 2) {
-            return false;
-        } else return currentUserEmpl.position.equals("Дежурный в ДЧ") || currentUserEmpl.position.equals("Admin");
     }
 }

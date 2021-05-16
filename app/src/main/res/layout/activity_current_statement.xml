@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CurrentVictimActivity">
+    tools:context=".CurrentStatementActivity">
 
     <LinearLayout
         android:id="@+id/line1"
@@ -55,14 +55,14 @@
         android:layout_below="@+id/currentName">
 
         <Button
-            android:id="@+id/editVictim"
+            android:id="@+id/editStatement"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="@string/edit" />
 
         <Button
-            android:id="@+id/deleteVictim"
+            android:id="@+id/deleteStatement"
             android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

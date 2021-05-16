@@ -27,9 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     EditText etLogin, etPass;
     CursachDatabase db;
     String[] roles = {"Войти как администратор", "Войти как сотрудник", "Войти как судья"};
-    int chooseRoleId = 0;
-    Organ_employee currentUserEmpl = null;
-    Judge currentUserJudge = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                chooseRoleId = position;
+                UserData.ROLE_ID = position;
             }
 
             @Override
@@ -87,15 +84,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void checkData(String login, String pass) {
         Thread thread = new Thread(() -> {
-            if (chooseRoleId == 0 || chooseRoleId == 1) {
+            if (UserData.ROLE_ID == 0 || UserData.ROLE_ID == 1) {
                 List<Organ_employee> organ_employees = CursachDatabase.getInstance(getApplicationContext()).organ_employeeDao().getAll();
                 for (Organ_employee organ_employee : organ_employees) {
                     if (login.equals(organ_employee.login) && BCrypt.checkpw(pass, organ_employee.password)) {
-                        if ((chooseRoleId == 0 && organ_employee.position.equals("Admin")) || chooseRoleId == 1) {
-                            currentUserEmpl = organ_employee;
+                        if ((UserData.ROLE_ID == 0 && organ_employee.position.equals("Admin")) || UserData.ROLE_ID == 1) {
+                            UserData.CURRENT_USER_EMPL = organ_employee;
                             Intent menuIntent = new Intent(MainActivity.this, MenuActivity.class);
-                            menuIntent.putExtra("currentUser", currentUserEmpl);
-                            menuIntent.putExtra("roleId", chooseRoleId);
                             startActivity(menuIntent);
                             return;
                         }
@@ -106,10 +101,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 List<Judge> listSingle = CursachDatabase.getInstance(getApplicationContext()).judgeDao().getAll();
                 for (Judge judge : listSingle) {
                     if (login.equals(judge.login) && BCrypt.checkpw(pass, judge.password)) {
-                        currentUserJudge = judge;
+                        UserData.CURRENT_USER_JUDGE = judge;
                         Intent menuIntent = new Intent(MainActivity.this, MenuActivity.class);
-                        menuIntent.putExtra("currentUser", currentUserJudge);
-                        menuIntent.putExtra("roleId", chooseRoleId);
                         startActivity(menuIntent);
                         return;
                     }

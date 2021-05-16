@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.testproject.db.entities.Victim;
 
@@ -29,6 +30,9 @@ public interface VictimDao {
 
     @Delete
     void delete(Victim user);
+
+    @Update
+    void update(Victim user);
 
     @Query("INSERT INTO Victim(lastname, firstname, middle_name, gender, birthday, passport, citizenship, social_status, official_position, phone) VALUES" +
             "('Смирнов', 'Виктор', 'Иванович', '1', '1987-08-13', '4215098764', 'Россия', 'Наемный рабочий'," +
