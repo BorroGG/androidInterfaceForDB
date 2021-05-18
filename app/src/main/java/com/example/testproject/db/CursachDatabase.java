@@ -14,6 +14,7 @@ import com.example.testproject.db.dao.Condition_of_committingDao;
 import com.example.testproject.db.dao.CourtDao;
 import com.example.testproject.db.dao.CrimeDao;
 import com.example.testproject.db.dao.Criminal_caseDao;
+import com.example.testproject.db.dao.CustomEntityDao;
 import com.example.testproject.db.dao.Damage_categoryDao;
 import com.example.testproject.db.dao.DepartmentDao;
 import com.example.testproject.db.dao.Focus_categoryDao;
@@ -73,6 +74,7 @@ public abstract class CursachDatabase extends RoomDatabase {
     public abstract CrimeDao crimeDao();
     public abstract Participants_in_crimeDao participants_in_crimeDao();
     public abstract DepartmentDao departmentDao();
+    public abstract CustomEntityDao customEntityDao();
 
     private static volatile CursachDatabase INSTANCE;
 
@@ -91,7 +93,7 @@ public abstract class CursachDatabase extends RoomDatabase {
 
                     INSTANCE = Room
                             .databaseBuilder(context.getApplicationContext(),
-                                    CursachDatabase.class, "cursach_db3")
+                                    CursachDatabase.class, "cursach_db6")
                             .addCallback(rdc)
                             .build();
                 }
@@ -132,14 +134,14 @@ public abstract class CursachDatabase extends RoomDatabase {
                     "('Управление экономической безопасности и противодействия коррупции ГУ МВД России по г. Москве')," +
                     "('Следственный отдел по Басманному району')");
             db.execSQL("INSERT INTO Organ_employee VALUES" +
-                    "('001101', 'Добролюбов', 'Тимофей', 'Степанович', 'Дежурный в ДЧ', 'Старший лейтенант', '4956879398', 1, 1, '$2y$10$u.hYaT8j30aqBZeOATdvy.U90HSxetSs0O.MNbu3Fjfi/0E6ZQ0I6', 'dobrolyubov_timofei')," +
-                    "('001102', 'Язов', 'Ефим', 'Федорович', 'Дежурный в ДЧ', 'Старший лейтенант', '4958843741', 1, 1, '$2y$10$GaAogRQtMA4fPdhObYqW/uvEACK2b4zNa2bc0rW/zIMarCKVuOCDW', 'yazov_efim')," +
-                    "('002201', 'Будаев', 'Василий', 'Прокопьевич', 'Дежурный в ДЧ', 'Старший лейтенант', '4956195717', 1, 2, '$2y$10$y6klNnimJtVq52SaP4twE.2ckNHGEYZBCwIeeP4tArPs41ssU9hpi', 'budaev_vasilii')," +
-                    "('002202', 'Дьяконов', 'Филипп', 'Валерьевич', 'Дежурный в ДЧ', 'Старший лейтенант', '4954796390', 1, 2, '$2y$10$NMsOApYqn34Ek5inc2jv4O0N7psf4zfJSX4/qQDYecTnRpCpY8oHu', 'dyakonov_filipp')," +
-                    "('003301', 'Чупракова', 'Любовь', 'Алексеевна', 'Прокурор', 'Генерал-лейтенант юстиции', '4956574461', 2, 3, '$2y$10$cOiD6niljyoijY8rvCc7Huq9Ia11rFaA0Gwq82VVwWkcGMja3Cz46', 'chuprakova_love')," +
-                    "('004401', 'Теплухин', 'Павел', 'Игнатьевич', 'Оперуполномоченный', 'Капитан внутренней службы', '4957714440', 1, 4, '$2y$10$uaRQAl8weA4dbAHwJmWMduLOG5T6S1HBQKYO.wIsbO48ZwPSmGsYm', 'teplukhin_pavel')," +
-                    "('005501', 'Райков', 'Александр', 'Егорович', 'Следователь', 'Подполковник юстиции', '4958118915', 3, 5, '$2y$10$ZYRwoSza5nI4ybgdcO6ca.QWPoDMRcytA23G/IC3fkEaTljRQwEAa', 'raikov_aleksander')," +
-                    "('777777', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 0, 0, '$2y$10$kJPQdmJ32Mm5t37njmCWh.DZJCa/fUouUfx0T2ir1uOszLN1nOGx2 ', 'kotik_igor')");
+                    "('001101', 'Добролюбов', 'Тимофей', 'Степанович', 'Дежурный в ДЧ', 'Старший лейтенант', '4956879398', 1, 1, '$2a$10$zfTN6pyA0MJaoCy/IgqtK./W581zhb.5v7wgEpBJhd5FpJGU6cWBm', 'dobrolyubov_timofei')," +
+                    "('001102', 'Язов', 'Ефим', 'Федорович', 'Дежурный в ДЧ', 'Старший лейтенант', '4958843741', 1, 1, '$2a$10$l1RlNJ8fytpZKFLrKYSXQOnvJgB4vpw4.WQJlVsUnErzu5zemC56u', 'yazov_efim')," +
+                    "('002201', 'Будаев', 'Василий', 'Прокопьевич', 'Дежурный в ДЧ', 'Старший лейтенант', '4956195717', 1, 2, '$2a$10$F.5CRdkx9CkDqb8COYZXc./4m5i/yyQm46fJGyT41bazM2khPGLou', 'budaev_vasilii')," +
+                    "('002202', 'Дьяконов', 'Филипп', 'Валерьевич', 'Дежурный в ДЧ', 'Старший лейтенант', '4954796390', 1, 2, '$2a$10$vFW40cRtlD128GEut3A3v.T/NGpgRTMpIET/9Gdlf7M4Mijj1Vwei', 'dyakonov_filipp')," +
+                    "('003301', 'Чупракова', 'Любовь', 'Алексеевна', 'Прокурор', 'Генерал-лейтенант юстиции', '4956574461', 2, 3, '$2a$10$lOahUgBJo63.elDoJEO8GOixY9Dql.EgIsZ2XhXHYbXV8X4jepKCu', 'chuprakova_love')," +
+                    "('004401', 'Теплухин', 'Павел', 'Игнатьевич', 'Оперуполномоченный', 'Капитан внутренней службы', '4957714440', 1, 4, '$2a$10$i/DjDHVQPCm1ZREkT38IE.PaHBj.r1b6PEFUpYtwAJypb9KBFvQK.', 'teplukhin_pavel')," +
+                    "('005501', 'Райков', 'Александр', 'Егорович', 'Следователь', 'Подполковник юстиции', '4958118915', 3, 5, '$2a$10$Clv.XnsAl6CPRIM1ZsBOVeUysTbxpjFOpYkxnS8ukoyF88zAHf2ZG', 'raikov_aleksander')," +
+                    "('777777', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 0, 0, '$2a$10$J/x2SyXnqNBXHl7XbDivNee0SkE6nAvoUKH679QUcTuyiXmIz2F0G', 'kotik_igor')");
             db.execSQL("INSERT INTO Statement VALUES" +
                     "(101, '2021-03-03', 'Рост: 170-175, среднего телосложения, волосы светлые, на вид 40-45 лет. Губы тонкие, на верхней челюсти золотой зуб.', 1, '001101')," +
                     "(102, '2021-03-10', 'Рост: 180-185, худощавого телосложения, волосы русые, подбородок квадратной формы. На правой ноге на голени большой синяк.', 2, '002201')," +
@@ -221,10 +223,10 @@ public abstract class CursachDatabase extends RoomDatabase {
                     "('Басманный районный суд ЦАО города Москвы', '107078, г.Москва, Каланчёвская улица, дом 11, строение 1')," +
                     "('Таганский районный суд ЦАО города Москвы', '109147, г.Москва, Марксистский переулок, дом 1/32')");
             db.execSQL("INSERT INTO Judge VALUES" +
-                    "('102101', 'Худякова', 'Елизавета', 'Николаевна', '$2y$10$HZ26VSOm3AuNt9nLhQ0ij.v1vxT21COuMLxBHO3AuJsXPHS/h89iK', 'khudyakova_elizaveta')," +
-                    "('102201', 'Новицкий', 'Федор', 'Афанасьевич', '$2y$10$pzaJYbt4IIy3tk63BxIfr.3KWxv0zVo18IkhWIX/Dsgao2HWtsq/q', 'novitsky_fedor')," +
-                    "('112101', 'Рудникова', 'Марианна', 'Максимовна', '$2y$10$wSzXJPFD.Y6cm/Nx6SEBg.9Ol.NQ3i07oPk5xM4FCuOnYp3YMAwgm', 'rudnikova_marianna')," +
-                    "('142303', 'Безукладников', 'Максим', 'Антонович', '$2y$10$f9a8Z0gjEcs1kipOLxthtuoBTENsqRUrp7KBW2r6A7o1GcUPmQvI2', 'bezukladnikov_maxim')");
+                    "('102101', 'Худякова', 'Елизавета', 'Николаевна', '$2a$10$gNDZQo/s4JgSp9t1f9hyNusZcA7TGQiLf651nCSJx/uChRekAEUHa', 'khudyakova_elizaveta')," +
+                    "('102201', 'Новицкий', 'Федор', 'Афанасьевич', '$2a$10$m8fMoYIUV0Og137q9JZDtOpmUdc0h064OuYCFrxbfW0L3B7ssqGWW', 'novitsky_fedor')," +
+                    "('112101', 'Рудникова', 'Марианна', 'Максимовна', '$2a$10$AwQbAUwNcBzAgnxVMFUXmeVg.wHj5/MZAPO22UkkX1uyadcBFVuHW', 'rudnikova_marianna')," +
+                    "('142303', 'Безукладников', 'Максим', 'Антонович', '$2a$10$mPqlPrugxWLA/myP4xadYeZrNdMkrFrwtbYjlKyxTX2.yE08PU4XW', 'bezukladnikov_maxim')");
         db.execSQL("INSERT INTO Criminal_case VALUES" +
                 "(501, '2021-03-25', '2021-05-09', 101, '005501', 2, '102101')," +
                 "(502, '2021-03-30', '2021-05-13', 102, '005501', 3, '102201')," +
@@ -254,14 +256,14 @@ public abstract class CursachDatabase extends RoomDatabase {
                 "(7, 7, '00', '0')," +
                 "(8, 8, '01', '5')");
         db.execSQL("INSERT INTO Sentence VALUES" +
-                "('501', '2021-04-25 16:03:20', 'Наказывается лишением свободы на срок до 10 лет.', '102101')," +
-                "('502', '2021-04-29 11:04:12', 'Наказывается исправительными работами на срок до двух лет.', '102201')," +
-                "('503', '2021-04-30 09:34:21', 'Наказывается штрафом осужденного за период до одного года.', '112101')," +
-                "('504', '2021-05-18 10:11:43', 'Осуждается арестом на срок до четырех месяцев.', '142303')," +
-                "('505', '2021-05-19 17:54:32', 'Наказывается ограничением свободы на срок до четырех лет.', '102101')," +
-                "('506', '2021-05-27 12:34:23', 'Наказывается принудительными работами на срок до пяти лет с лишением права занимать определенные должности.', '102201')," +
-                "('507', '2021-06-01 10:23:10', 'Наказываются лишением свободы на срок до шести лет.', '112101')," +
-                "('508', '2021-06-02 09:56:43', 'Наказывается лишением свободы на срок до семи лет со штрафом в размере до пятисот тысяч рублей.', '142303')");
+                "(501, '2021-04-25 16:03:20', 'Наказывается лишением свободы на срок до 10 лет.', '102101')," +
+                "(502, '2021-04-29 11:04:12', 'Наказывается исправительными работами на срок до двух лет.', '102201')," +
+                "(503, '2021-04-30 09:34:21', 'Наказывается штрафом осужденного за период до одного года.', '112101')," +
+                "(504, '2021-05-18 10:11:43', 'Осуждается арестом на срок до четырех месяцев.', '142303')," +
+                "(505, '2021-05-19 17:54:32', 'Наказывается ограничением свободы на срок до четырех лет.', '102101')," +
+                "(506, '2021-05-27 12:34:23', 'Наказывается принудительными работами на срок до пяти лет с лишением права занимать определенные должности.', '102201')," +
+                "(507, '2021-06-01 10:23:10', 'Наказываются лишением свободы на срок до шести лет.', '112101')," +
+                "(508, '2021-06-02 09:56:43', 'Наказывается лишением свободы на срок до семи лет со штрафом в размере до пятисот тысяч рублей.', '142303')");
         });
         thread.start();
     }

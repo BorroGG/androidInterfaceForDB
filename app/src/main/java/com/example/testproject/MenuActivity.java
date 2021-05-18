@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.testproject.db.entities.Judge;
 import com.example.testproject.db.entities.Organ_employee;
+import com.example.testproject.db.entities.Sentence;
 
 import java.sql.Statement;
 
@@ -30,10 +31,14 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         btnStatement = findViewById(R.id.statementButton);
         btnOrganEmployee = findViewById(R.id.organ_employee);
         btnCriminalCase = findViewById(R.id.criminal_case);
+        btnCriminalCase.setVisibility(UserData.isDutyOfficer() ? View.GONE : View.VISIBLE);
         btnAccused = findViewById(R.id.accused);
+        btnAccused.setVisibility(UserData.isDutyOfficer() ? View.GONE : View.VISIBLE);
         btnSentence = findViewById(R.id.sentence);
         btnSentence.setVisibility(UserData.ROLE_ID == 1 ? View.GONE : View.VISIBLE);
         btnPeriod = findViewById(R.id.period);
+        btnSentence.setVisibility(UserData.ROLE_ID == 1 ? View.GONE : View.VISIBLE);
+
         btnVictim.setOnClickListener(this);
         btnStatement.setOnClickListener(this);
         btnOrganEmployee.setOnClickListener(this);
@@ -63,19 +68,24 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentStatement);
                 break;
             case R.id.organ_employee:
-                System.out.println("organ_employee");
+                Intent intentOrgan_Employee = new Intent(MenuActivity.this, Organ_EmployeeActivity.class);
+                startActivity(intentOrgan_Employee);
                 break;
             case R.id.criminal_case:
-                System.out.println("criminal_case");
+                Intent intentCriminal_case = new Intent(MenuActivity.this, Criminal_caseActivity.class);
+                startActivity(intentCriminal_case);
                 break;
             case R.id.accused:
-                System.out.println("accused");
+                Intent intentAccused = new Intent(MenuActivity.this, AccusedActivity.class);
+                startActivity(intentAccused);
                 break;
             case R.id.sentence:
-                System.out.println("sentence");
+                Intent intentSentence = new Intent(MenuActivity.this, SentenceActivity.class);
+                startActivity(intentSentence);
                 break;
             case R.id.period:
-                System.out.println("period");
+                Intent intentPeriodSentence = new Intent(MenuActivity.this, PeriodSentenceActivity.class);
+                startActivity(intentPeriodSentence);
                 break;
 
         }

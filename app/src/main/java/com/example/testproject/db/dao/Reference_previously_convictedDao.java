@@ -3,6 +3,10 @@ package com.example.testproject.db.dao;
 import androidx.room.Dao;
 import androidx.room.Query;
 
+import com.example.testproject.db.entities.Accused;
+import com.example.testproject.db.entities.Reference_previously_convicted;
+
+import java.util.List;
 
 
 @Dao
@@ -19,4 +23,7 @@ public interface Reference_previously_convictedDao {
             "('08', 'Изготовление поддельных денег и ценных бумаг')," +
             "('09', 'Уклонение от уплаты налога')")
     void insertStartData();
+
+    @Query("SELECT * FROM Reference_previously_convicted")
+    List<Reference_previously_convicted> getAll();
 }

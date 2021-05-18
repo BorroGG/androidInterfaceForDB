@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.testproject.db.entities.Organ_employee;
 
@@ -32,6 +33,9 @@ public interface Organ_employeeDao {
 
     @Delete
     void delete(Organ_employee user);
+
+    @Update
+    void update(Organ_employee user);
 
     @Query("INSERT INTO Organ_employee VALUES" +
             "('001101', 'Добролюбов', 'Тимофей', 'Степанович', 'Дежурный в ДЧ', 'Старший лейтенант', '4956879398', 1, 1, '$2y$10$u.hYaT8j30aqBZeOATdvy.U90HSxetSs0O.MNbu3Fjfi/0E6ZQ0I6', 'dobrolyubov_timofei')," +

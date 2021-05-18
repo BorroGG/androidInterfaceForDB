@@ -4,8 +4,10 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.testproject.db.entities.Statement;
+import com.example.testproject.db.entities.Victim;
 
 import java.util.List;
 
@@ -27,8 +29,16 @@ public interface StatementDao {
     @Insert
     void insertAll(Statement... users);
 
+    @Query("SELECT registration_date FROM Statement st " +
+            "JOIN Criminal_case cc on st.id_statement = cc.id_statement " +
+            "WHERE id_criminal_case = :id_sent")
+    String getRegistration_date(int id_sent);
+
     @Delete
     void delete(Statement user);
+
+    @Update
+    void update(Statement user);
 
     @Query("INSERT INTO Statement VALUES" +
             "(101, '2021-03-03', 'Рост: 170-175, среднего телосложения, волосы светлые, на вид 40-45 лет. Губы тонкие, на верхней челюсти золотой зуб.', 1, '001101')," +

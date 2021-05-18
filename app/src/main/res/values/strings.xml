@@ -38,7 +38,41 @@
     <string name="phoneCommon">Телефон</string>
 
     <string name="addStatement">Добавить заявление</string>
+    <string name="addCriminal_case">Добавить уголовное дело</string>
     <string name="addingVictim">Добавление потерпевшего</string>
+    <string name="addingSentence">Добавление приговора</string>
+    <string name="addSentence">Добавить приговор</string>
+    <string name="addingAccused">Добавление обвиняемого</string>
+
+    <string name="addAccused">Добавить обвиняемого</string>
+    <string name="addingStatement">Добавление заявления</string>
+
+    <string name="id_statement">Номер заявления</string>
+    <string name="Registration_date">Дата регистрации</string>
+    <string name="Additional_information">Дополнительные сведения</string>
+    <string name="Id_victim">Код потерпевшего</string>
+    <string name="Id_organ_employee">Табельный номер сотрудника органа</string>
+
+    <string name="date_of_excitement">Дата возбуждения</string>
+    <string name="date_of_filing">Дата сдачи в архив</string>
+    <string name="addingCriminal_case">Создание уголовного дела</string>
+    <string name="Criminal_case">Уголовное дело</string>
+    <string name="Accused">Обвиняемый</string>
+    <string name="Crime">Преступление</string>
+    <string name="Qualification_of_crime">Квалификация преступления</string>
+    <string name="Participants_in_crime">Участники преступления</string>
+    <string name="date_and_time_of_crime">Дата и время совершения преступления</string>
+    <string name="number_of_criminal_case">Номер в уголовном деле</string>
+    <string name="participants">Участники преступления</string>
+
+    <string name="date_of_issue">Дата вынесения</string>
+    <string name="content">Содержание</string>
+    <string name="periodSentence">Период жизни дела от даты подачи заявления до даты вынесения приговора:</string>
+
+    <string name="article">Статья</string>
+    <string name="sign">Знак</string>
+    <string name="part">Часть</string>
+    <string name="item">Пункт</string>
 
 
     <string name="title_activity_register">RegisterActivity</string>

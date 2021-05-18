@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CurrentStatementActivity">
+    tools:context=".CurrentCriminal_caseActivity">
 
     <LinearLayout
         android:id="@+id/line1"
@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:gravity="start"
             android:maxLength="25"
+            android:gravity="start"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -48,37 +48,14 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <LinearLayout
-        android:id="@+id/line2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/currentName">
-
-        <Button
-            android:id="@+id/editStatement"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/edit" />
-
-        <Button
-            android:id="@+id/deleteStatement"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:text="@string/delete" />
-    </LinearLayout>
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/line2"
+        android:layout_below="@+id/currentName"
         android:layout_centerHorizontal="true">
 
         <RelativeLayout
-            android:id="@+id/relativeLayoutCurrentStatementEditTexts"
+            android:id="@+id/relativeLayoutCurrentCriminal_caseEditTexts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -122,6 +99,60 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/lineText4"
+                android:orientation="vertical"
+                android:gravity="start">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lineText6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lineText5"
+                android:orientation="vertical"
+                android:gravity="start">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lineText7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lineText6"
+                android:orientation="vertical"
+                android:gravity="start">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lineText8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lineText7"
+                android:orientation="vertical"
+                android:gravity="start">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lineText9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lineText8"
+                android:orientation="vertical"
+                android:gravity="start">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lineText10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lineText9"
+                android:orientation="vertical"
+                android:gravity="start">
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lineText11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lineText10"
                 android:orientation="vertical"
                 android:gravity="start">
             </LinearLayout>

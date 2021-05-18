@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayoutVictim"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    tools:context=".VictimActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CurrentPeriodSentenceActivity">
 
     <LinearLayout
-        android:id="@+id/line"
+        android:id="@+id/line1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
@@ -38,38 +38,38 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/mainMenuText"
+        android:id="@+id/currentName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/line"
+        android:layout_below="@+id/line1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="@string/victim"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/addVictim"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mainMenuText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/addVictim" />
-
-    <ScrollView
+    <TextView
+        android:id="@+id/periodSentence"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addVictim"
-        android:layout_centerHorizontal="true">
+        android:layout_below="@+id/currentName"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"
+        android:text="@string/periodSentence"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-        <RelativeLayout
-            android:id="@+id/relativeLayoutVictimForButtons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        </RelativeLayout>
-    </ScrollView>
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/periodSentence"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>

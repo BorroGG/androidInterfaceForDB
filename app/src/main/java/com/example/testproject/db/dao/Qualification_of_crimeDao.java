@@ -1,8 +1,11 @@
 package com.example.testproject.db.dao;
 
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.testproject.db.entities.Accused;
+import com.example.testproject.db.entities.Qualification_of_crime;
 
 
 @Dao
@@ -18,4 +21,7 @@ public interface Qualification_of_crimeDao {
             "('240', '', '2', 'а')," +
             "('228', '1', '2', 'б')")
     void insertStartData();
+
+    @Insert
+    long[] insertAll(Qualification_of_crime... users);
 }

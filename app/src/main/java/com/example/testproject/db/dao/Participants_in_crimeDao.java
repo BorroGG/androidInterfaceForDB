@@ -1,8 +1,11 @@
 package com.example.testproject.db.dao;
 
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.testproject.db.entities.Accused;
+import com.example.testproject.db.entities.Participants_in_crime;
 
 
 @Dao
@@ -18,4 +21,7 @@ public interface Participants_in_crimeDao {
             "(7, 7, '00', '0')," +
             "(8, 8, '01', '5')")
     void insertStartData();
+
+    @Insert
+    long[] insertAll(Participants_in_crime... users);
 }

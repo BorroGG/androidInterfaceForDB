@@ -7,78 +7,81 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.testproject.db.CursachDatabase;
+import com.example.testproject.db.entities.Accused;
 import com.example.testproject.db.entities.Judge;
 import com.example.testproject.db.entities.Organ_employee;
-import com.example.testproject.db.entities.Statement;
-import com.example.testproject.db.entities.Victim;
+import com.example.testproject.db.entities.Accused;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatementActivity extends AppCompatActivity {
+public class AccusedActivity extends AppCompatActivity {
 
-    private volatile List<Statement> statementList = new ArrayList<>();
+    private volatile List<Accused> accusedsList = new ArrayList<>();
     Button[] buttons;
-    Button addStatement;
-    private RelativeLayout relativeLayout, relativeLayoutStatementForButtons;
+    Button addAccused;
+    private RelativeLayout relativeLayoutAccusedForButtons;
     TextView tvUserName, tvExit;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_statement);
 
-        relativeLayout = findViewById(R.id.relativeLayoutVictim);
-        relativeLayoutStatementForButtons = findViewById(R.id.relativeLayoutStatementForButtons);
-        addStatement = findViewById(R.id.addStatement);
+    @Override
+    protected synchronized void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_accused);
+
+        relativeLayoutAccusedForButtons = findViewById(R.id.relativeLayoutAccusedForButtons);
+        addAccused = findViewById(R.id.addAccused);
         tvUserName = findViewById(R.id.userNameText);
         tvExit = findViewById(R.id.exitText);
         tvExit.setOnClickListener(v -> {
-            Intent intent = new Intent(StatementActivity.this, MainActivity.class);
+            Intent intent = new Intent(AccusedActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
         tvUserName.setText(UserData.getYouLogAs());
 
-        if (!UserData.isDutyOfficer()) {
-            addStatement.setVisibility(View.GONE);
+        if (UserData.isDutyOfficer() || UserData.ROLE_ID == 2) {
+            addAccused.setVisibility(View.GONE);
         }
 
-        addStatement.setOnClickListener(v -> {
-            Intent intent = new Intent(StatementActivity.this, AddStatementActivity.class);
+        addAccused.setOnClickListener(v -> {
+            Intent intent = new Intent(AccusedActivity.this, AddAccusedActivity.class);
             startActivity(intent);
         });
+
     }
 
     @SuppressLint("ResourceType")
     private void setButtonsData() {
 
-        relativeLayoutStatementForButtons.removeAllViews();
+        relativeLayoutAccusedForButtons.removeAllViews();
 
         try {
-            getAllStatements().join();
+            getAllAccused().join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        buttons = new Button[statementList.size()];
-        for (int i = 0; i < statementList.size(); i++) {
+        buttons = new Button[accusedsList.size()];
+        for (int i = 0; i < accusedsList.size(); i++) {
             int buttonStyle = R.drawable.button;
             buttons[i] = new Button(getApplicationContext());
-            String text = statementList.get(i).id_statement + "";
+            String text = accusedsList.get(i).lastname + " " + accusedsList.get(i).firstname + " " + accusedsList.get(i).middle_name;
             buttons[i].setText(text);
-            buttons[i].setId(800 + i);
+            buttons[i].setId(700 + i);
             buttons[i].setBackgroundResource(buttonStyle);
             buttons[i].setTextColor(getResources().getColor(R.color.white));
             buttons[i].setOnClickListener(v -> {
-                Intent intent = new Intent(StatementActivity.this, CurrentStatementActivity.class);
-                intent.putExtra("currentStatement", statementList.get(v.getId() - 800));
+                Intent intent = new Intent(AccusedActivity.this, CurrentAccusedActivity.class);
+                intent.putExtra("currentAccused", accusedsList.get(v.getId() - 700));
                 startActivity(intent);
             });
 
@@ -96,10 +99,10 @@ public class StatementActivity extends AppCompatActivity {
             if (i != 0) {
                 buttonParams.addRule(RelativeLayout.BELOW, buttons[i - 1].getId());
             } else {
-                buttonParams.addRule(RelativeLayout.BELOW, addStatement.getId());
+                buttonParams.addRule(RelativeLayout.BELOW, addAccused.getId());
             }
 
-            relativeLayoutStatementForButtons.addView(buttons[i], buttonParams);
+            relativeLayoutAccusedForButtons.addView(buttons[i], buttonParams);
         }
     }
 
@@ -109,8 +112,8 @@ public class StatementActivity extends AppCompatActivity {
         setButtonsData();
     }
 
-    private synchronized Thread getAllStatements() {
-        Thread thread = new Thread(() -> statementList = CursachDatabase.getInstance(getApplicationContext()).statementDao().getAll());
+    private synchronized Thread getAllAccused() {
+        Thread thread = new Thread(() -> accusedsList = CursachDatabase.getInstance(getApplicationContext()).accusedDao().getAll());
         thread.start();
         return thread;
     }

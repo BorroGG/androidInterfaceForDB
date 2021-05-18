@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddVictimActivity">
+    tools:context=".AddAccusedActivity">
 
     <LinearLayout
         android:id="@+id/line1"
@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:maxLength="25"
             android:gravity="start"
+            android:maxLength="25"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -44,7 +44,7 @@
         android:layout_below="@+id/line1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="@string/addingVictim"
+        android:text="@string/addingAccused"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />

@@ -13,72 +13,70 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.Judge;
-import com.example.testproject.db.entities.Organ_employee;
-import com.example.testproject.db.entities.Statement;
-import com.example.testproject.db.entities.Victim;
+import com.example.testproject.db.entities.CustomEntity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatementActivity extends AppCompatActivity {
+public class Criminal_caseActivity extends AppCompatActivity {
 
-    private volatile List<Statement> statementList = new ArrayList<>();
+    private volatile List<CustomEntity> customEntities = new ArrayList<>();
     Button[] buttons;
-    Button addStatement;
-    private RelativeLayout relativeLayout, relativeLayoutStatementForButtons;
+    Button addCriminal_case;
+    private RelativeLayout relativeLayoutCriminal_caseForButtons;
     TextView tvUserName, tvExit;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_statement);
 
-        relativeLayout = findViewById(R.id.relativeLayoutVictim);
-        relativeLayoutStatementForButtons = findViewById(R.id.relativeLayoutStatementForButtons);
-        addStatement = findViewById(R.id.addStatement);
+    @Override
+    protected synchronized void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_criminal_case);
+
+        relativeLayoutCriminal_caseForButtons = findViewById(R.id.relativeLayoutCriminal_caseForButtons);
+        addCriminal_case = findViewById(R.id.addCriminal_case);
         tvUserName = findViewById(R.id.userNameText);
         tvExit = findViewById(R.id.exitText);
         tvExit.setOnClickListener(v -> {
-            Intent intent = new Intent(StatementActivity.this, MainActivity.class);
+            Intent intent = new Intent(Criminal_caseActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
         tvUserName.setText(UserData.getYouLogAs());
 
-        if (!UserData.isDutyOfficer()) {
-            addStatement.setVisibility(View.GONE);
+        if (UserData.ROLE_ID == 2) {
+            addCriminal_case.setVisibility(View.GONE);
         }
 
-        addStatement.setOnClickListener(v -> {
-            Intent intent = new Intent(StatementActivity.this, AddStatementActivity.class);
+        addCriminal_case.setOnClickListener(v -> {
+            Intent intent = new Intent(Criminal_caseActivity.this, AddCriminal_caseActivity.class);
             startActivity(intent);
         });
+
     }
 
     @SuppressLint("ResourceType")
     private void setButtonsData() {
 
-        relativeLayoutStatementForButtons.removeAllViews();
+        relativeLayoutCriminal_caseForButtons.removeAllViews();
 
         try {
-            getAllStatements().join();
+            getAllCriminal_case().join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        buttons = new Button[statementList.size()];
-        for (int i = 0; i < statementList.size(); i++) {
+        buttons = new Button[customEntities.size()];
+        for (int i = 0; i < customEntities.size(); i++) {
             int buttonStyle = R.drawable.button;
             buttons[i] = new Button(getApplicationContext());
-            String text = statementList.get(i).id_statement + "";
+            String text = String.valueOf(customEntities.get(i).cc_id_criminal_case);
             buttons[i].setText(text);
-            buttons[i].setId(800 + i);
+            buttons[i].setId(600 + i);
             buttons[i].setBackgroundResource(buttonStyle);
             buttons[i].setTextColor(getResources().getColor(R.color.white));
             buttons[i].setOnClickListener(v -> {
-                Intent intent = new Intent(StatementActivity.this, CurrentStatementActivity.class);
-                intent.putExtra("currentStatement", statementList.get(v.getId() - 800));
+                Intent intent = new Intent(Criminal_caseActivity.this, CurrentCriminal_caseActivity.class);
+                intent.putExtra("currentCustomEntity", customEntities.get(v.getId() - 600));
                 startActivity(intent);
             });
 
@@ -96,10 +94,10 @@ public class StatementActivity extends AppCompatActivity {
             if (i != 0) {
                 buttonParams.addRule(RelativeLayout.BELOW, buttons[i - 1].getId());
             } else {
-                buttonParams.addRule(RelativeLayout.BELOW, addStatement.getId());
+                buttonParams.addRule(RelativeLayout.BELOW, addCriminal_case.getId());
             }
 
-            relativeLayoutStatementForButtons.addView(buttons[i], buttonParams);
+            relativeLayoutCriminal_caseForButtons.addView(buttons[i], buttonParams);
         }
     }
 
@@ -109,8 +107,19 @@ public class StatementActivity extends AppCompatActivity {
         setButtonsData();
     }
 
-    private synchronized Thread getAllStatements() {
-        Thread thread = new Thread(() -> statementList = CursachDatabase.getInstance(getApplicationContext()).statementDao().getAll());
+    private synchronized Thread getAllCriminal_case() {
+        Thread thread = new Thread(() -> {
+            customEntities = CursachDatabase.getInstance(getApplicationContext()).customEntityDao().loadCustomEntityNamesForUs();
+            if (UserData.ROLE_ID == 2) {
+                List<CustomEntity> customEntitiesTemp = new ArrayList<>();
+                for (int i = 0; i < customEntities.size(); i++) {
+                    if (customEntities.get(i).j_id_judge.equals(UserData.CURRENT_USER_JUDGE.id_judge)) {
+                        customEntitiesTemp.add(customEntities.get(i));
+                    }
+                }
+                customEntities = customEntitiesTemp;
+            }
+        });
         thread.start();
         return thread;
     }

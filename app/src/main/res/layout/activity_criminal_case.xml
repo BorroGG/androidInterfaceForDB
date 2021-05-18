@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayoutVictim"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    tools:context=".VictimActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Criminal_caseActivity">
 
     <LinearLayout
         android:id="@+id/line"
@@ -44,28 +44,28 @@
         android:layout_below="@+id/line"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="@string/victim"
+        android:text="@string/criminal_case"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/addVictim"
+        android:id="@+id/addCriminal_case"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mainMenuText"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="@string/addVictim" />
+        android:text="@string/addCriminal_case" />
 
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addVictim"
+        android:layout_below="@+id/addCriminal_case"
         android:layout_centerHorizontal="true">
 
         <RelativeLayout
-            android:id="@+id/relativeLayoutVictimForButtons"
+            android:id="@+id/relativeLayoutCriminal_caseForButtons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 

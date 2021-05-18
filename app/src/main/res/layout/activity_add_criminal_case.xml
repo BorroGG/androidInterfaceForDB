@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddCriminal_caseActivity">
+
+    <LinearLayout
+        android:id="@+id/line1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/userNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="start"
+            android:maxLength="25"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/exitText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="end"
+            android:text="@string/exit"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/currentName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/addingCriminal_case"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/currentName">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/addCriminal_caseText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="@string/Criminal_case"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/date_of_excitement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/addCriminal_caseText"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/date_of_excitement"
+                android:inputType="text" />
+            <EditText
+                android:id="@+id/date_of_filing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date_of_excitement"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/date_of_filing"
+                android:inputType="textPersonName" />
+
+            <Spinner
+                android:id="@+id/spinnerIdStatement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date_of_filing"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Spinner
+                android:id="@+id/spinnerIdOrgan_Employee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerIdStatement"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Spinner
+                android:id="@+id/spinnerIdCourt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerIdOrgan_Employee"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Spinner
+                android:id="@+id/spinnerIdJudge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerIdCourt"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/addAccusedText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/spinnerIdJudge"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="@string/Accused"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/surname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/addAccusedText"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/surname"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/surname"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/middleName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/middleName"
+                android:inputType="textPersonName" />
+
+            <Spinner
+                android:id="@+id/genderSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/middleName"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <EditText
+                android:id="@+id/birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/genderSpinner"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/birthday"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/passport"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/birthday"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/passport"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/citizenship"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/passport"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/citizenship"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/social_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/citizenship"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/social_status"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/official_position"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/social_status"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/official_position"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/phoneCommon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/official_position"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/phoneCommon"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/addCrimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phoneCommon"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="@string/Crime"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/number_of_criminal_case"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/addCrimeText"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/number_of_criminal_case"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/date_and_time_of_crime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/number_of_criminal_case"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/date_and_time_of_crime"
+                android:inputType="textPersonName" />
+
+            <Spinner
+                android:id="@+id/id_type_of_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date_and_time_of_crime"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Spinner
+                android:id="@+id/id_category_of_crimes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_type_of_group"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Spinner
+                android:id="@+id/id_focus_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_category_of_crimes"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Spinner
+                android:id="@+id/id_damage_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_focus_category"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:id="@+id/Qualification_of_crimeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_damage_category"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="@string/Qualification_of_crime"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/article"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Qualification_of_crimeText"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/article"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/sign"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/article"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/sign"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/part"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sign"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/part"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/part"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/item"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/participants"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/item"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="@string/participants"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/id_conviction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/participants"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Spinner
+                android:id="@+id/id_condition_of_committing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_conviction"
+                android:layout_marginTop="20dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/acceptReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/id_condition_of_committing"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/acceptReg" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

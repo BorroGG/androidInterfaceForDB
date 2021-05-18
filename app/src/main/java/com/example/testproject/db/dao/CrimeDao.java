@@ -1,8 +1,11 @@
 package com.example.testproject.db.dao;
 
 import androidx.room.Dao;
+import androidx.room.Insert;
 import androidx.room.Query;
 
+import com.example.testproject.db.entities.Accused;
+import com.example.testproject.db.entities.Crime;
 
 
 @Dao
@@ -19,4 +22,7 @@ public interface CrimeDao {
             "('1', '2021-04-01 23:43:39', 507, 7, '0001', '2', '1', '1')," +
             "('1', '2021-04-03 18:08:29', 508, 8, '0200', '1', '1', '2')")
     void insertStartData();
+
+    @Insert
+    long[] insertAll(Crime... users);
 }

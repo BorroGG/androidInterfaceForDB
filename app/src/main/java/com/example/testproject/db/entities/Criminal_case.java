@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
+
 @Entity
-public class Criminal_case {
-    @PrimaryKey
+public class Criminal_case implements Serializable {
+    @PrimaryKey(autoGenerate = true)
     @NonNull
     public int id_criminal_case;
     public String date_of_excitement;

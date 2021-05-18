@@ -3,6 +3,10 @@ package com.example.testproject.db.dao;
 import androidx.room.Dao;
 import androidx.room.Query;
 
+import com.example.testproject.db.entities.Accused;
+import com.example.testproject.db.entities.Condition_of_committing;
+
+import java.util.List;
 
 
 @Dao
@@ -17,4 +21,7 @@ public interface Condition_of_committingDao {
             "('5', 'Хроническая наркозависимость')," +
             "('6', 'Хроническая токсикомания')")
     void insertStartData();
+
+    @Query("SELECT * FROM Condition_of_committing")
+    List<Condition_of_committing> getAll();
 }

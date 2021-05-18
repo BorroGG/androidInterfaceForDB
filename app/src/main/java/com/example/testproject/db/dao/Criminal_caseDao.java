@@ -7,13 +7,14 @@ import androidx.room.Query;
 
 import com.example.testproject.db.entities.Criminal_case;
 
+import java.io.Serializable;
 import java.util.List;
 
 
 import io.reactivex.rxjava3.core.Single;
 
 @Dao
-public interface Criminal_caseDao {
+public interface Criminal_caseDao  {
     @Query("SELECT * FROM Criminal_case")
     List<Criminal_case> getAll();
 
@@ -25,7 +26,7 @@ public interface Criminal_caseDao {
     Criminal_case findByName(String first, String last);
 
     @Insert
-    void insertAll(Criminal_case... users);
+    long[] insertAll(Criminal_case... users);
 
     @Delete
     void delete(Criminal_case user);

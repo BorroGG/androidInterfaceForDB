@@ -7,78 +7,65 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.Judge;
-import com.example.testproject.db.entities.Organ_employee;
-import com.example.testproject.db.entities.Statement;
-import com.example.testproject.db.entities.Victim;
+import com.example.testproject.db.entities.Sentence;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatementActivity extends AppCompatActivity {
+public class PeriodSentenceActivity extends AppCompatActivity {
 
-    private volatile List<Statement> statementList = new ArrayList<>();
+    private volatile List<Sentence> sentenceList = new ArrayList<>();
     Button[] buttons;
-    Button addStatement;
-    private RelativeLayout relativeLayout, relativeLayoutStatementForButtons;
-    TextView tvUserName, tvExit;
+    private RelativeLayout relativeLayoutPeriodSentenceForButtons;
+    TextView tvUserName, tvExit, tvSentenceText;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected synchronized void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_statement);
+        setContentView(R.layout.activity_period_sentence);
 
-        relativeLayout = findViewById(R.id.relativeLayoutVictim);
-        relativeLayoutStatementForButtons = findViewById(R.id.relativeLayoutStatementForButtons);
-        addStatement = findViewById(R.id.addStatement);
+        relativeLayoutPeriodSentenceForButtons = findViewById(R.id.relativeLayoutPeriodSentenceForButtons);
         tvUserName = findViewById(R.id.userNameText);
+        tvSentenceText = findViewById(R.id.SentenceText);
         tvExit = findViewById(R.id.exitText);
         tvExit.setOnClickListener(v -> {
-            Intent intent = new Intent(StatementActivity.this, MainActivity.class);
+            Intent intent = new Intent(PeriodSentenceActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
         tvUserName.setText(UserData.getYouLogAs());
 
-        if (!UserData.isDutyOfficer()) {
-            addStatement.setVisibility(View.GONE);
-        }
-
-        addStatement.setOnClickListener(v -> {
-            Intent intent = new Intent(StatementActivity.this, AddStatementActivity.class);
-            startActivity(intent);
-        });
     }
 
     @SuppressLint("ResourceType")
     private void setButtonsData() {
 
-        relativeLayoutStatementForButtons.removeAllViews();
+        relativeLayoutPeriodSentenceForButtons.removeAllViews();
 
         try {
-            getAllStatements().join();
+            getAllSentence().join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        buttons = new Button[statementList.size()];
-        for (int i = 0; i < statementList.size(); i++) {
+        buttons = new Button[sentenceList.size()];
+        for (int i = 0; i < sentenceList.size(); i++) {
             int buttonStyle = R.drawable.button;
             buttons[i] = new Button(getApplicationContext());
-            String text = statementList.get(i).id_statement + "";
+            String text = sentenceList.get(i).id_sentence + "";
             buttons[i].setText(text);
-            buttons[i].setId(800 + i);
+            buttons[i].setId(400 + i);
             buttons[i].setBackgroundResource(buttonStyle);
             buttons[i].setTextColor(getResources().getColor(R.color.white));
             buttons[i].setOnClickListener(v -> {
-                Intent intent = new Intent(StatementActivity.this, CurrentStatementActivity.class);
-                intent.putExtra("currentStatement", statementList.get(v.getId() - 800));
+                Intent intent = new Intent(PeriodSentenceActivity.this, CurrentPeriodSentenceActivity.class);
+                intent.putExtra("currentSentence", sentenceList.get(v.getId() - 400));
                 startActivity(intent);
             });
 
@@ -96,10 +83,10 @@ public class StatementActivity extends AppCompatActivity {
             if (i != 0) {
                 buttonParams.addRule(RelativeLayout.BELOW, buttons[i - 1].getId());
             } else {
-                buttonParams.addRule(RelativeLayout.BELOW, addStatement.getId());
+                buttonParams.addRule(RelativeLayout.BELOW, tvSentenceText.getId());
             }
 
-            relativeLayoutStatementForButtons.addView(buttons[i], buttonParams);
+            relativeLayoutPeriodSentenceForButtons.addView(buttons[i], buttonParams);
         }
     }
 
@@ -109,8 +96,19 @@ public class StatementActivity extends AppCompatActivity {
         setButtonsData();
     }
 
-    private synchronized Thread getAllStatements() {
-        Thread thread = new Thread(() -> statementList = CursachDatabase.getInstance(getApplicationContext()).statementDao().getAll());
+    private synchronized Thread getAllSentence() {
+        Thread thread = new Thread(() -> {
+            sentenceList = CursachDatabase.getInstance(getApplicationContext()).sentenceDao().getAll();
+            if (UserData.ROLE_ID == 2) {
+                List<Sentence> sentences = new ArrayList<>();
+                for (int i = 0; i < sentenceList.size(); i++) {
+                    if (sentenceList.get(i).id_judge.equals(UserData.CURRENT_USER_JUDGE.id_judge)) {
+                        sentences.add(sentenceList.get(i));
+                    }
+                }
+                sentenceList = sentences;
+            }
+        });
         thread.start();
         return thread;
     }

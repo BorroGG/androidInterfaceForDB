@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.testproject.db.entities.Accused;
 
@@ -22,10 +23,13 @@ public interface AccusedDao {
     Accused findByName(String first, String last);
 
     @Insert
-    void insertAll(Accused... users);
+    long[] insertAll(Accused... users);
 
     @Delete
     void delete(Accused user);
+
+    @Update
+    void update(Accused user);
 
     @Query("INSERT INTO Accused(lastname, firstname, middle_name, gender, birthday, passport, citizenship, social_status, official_position, phone) VALUES" +
             "('Лисицын', 'Кирилл', 'Семенович', '1', '1976-03-09', '4438300865', 'Россия', 'Иждивенец'," +

@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,70 +17,60 @@ import android.widget.TextView;
 import com.example.testproject.db.CursachDatabase;
 import com.example.testproject.db.entities.Judge;
 import com.example.testproject.db.entities.Organ_employee;
-import com.example.testproject.db.entities.Statement;
 import com.example.testproject.db.entities.Victim;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatementActivity extends AppCompatActivity {
+public class Organ_EmployeeActivity extends AppCompatActivity {
 
-    private volatile List<Statement> statementList = new ArrayList<>();
+    private volatile List<Organ_employee> organ_employees = new ArrayList<>();
     Button[] buttons;
-    Button addStatement;
-    private RelativeLayout relativeLayout, relativeLayoutStatementForButtons;
-    TextView tvUserName, tvExit;
+    private RelativeLayout relativeLayoutOrganEmployeeForButtons;
+    TextView tvUserName, tvExit, listName;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected synchronized void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_statement);
+        setContentView(R.layout.activity_organ__employee);
 
-        relativeLayout = findViewById(R.id.relativeLayoutVictim);
-        relativeLayoutStatementForButtons = findViewById(R.id.relativeLayoutStatementForButtons);
-        addStatement = findViewById(R.id.addStatement);
+        relativeLayoutOrganEmployeeForButtons = findViewById(R.id.relativeLayoutOrgan_EmployeeForButtons);
         tvUserName = findViewById(R.id.userNameText);
         tvExit = findViewById(R.id.exitText);
+        listName = findViewById(R.id.mainMenuText);
         tvExit.setOnClickListener(v -> {
-            Intent intent = new Intent(StatementActivity.this, MainActivity.class);
+            Intent intent = new Intent(Organ_EmployeeActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
         tvUserName.setText(UserData.getYouLogAs());
 
-        if (!UserData.isDutyOfficer()) {
-            addStatement.setVisibility(View.GONE);
-        }
-
-        addStatement.setOnClickListener(v -> {
-            Intent intent = new Intent(StatementActivity.this, AddStatementActivity.class);
-            startActivity(intent);
-        });
     }
 
     @SuppressLint("ResourceType")
     private void setButtonsData() {
 
-        relativeLayoutStatementForButtons.removeAllViews();
+        relativeLayoutOrganEmployeeForButtons.removeAllViews();
 
         try {
-            getAllStatements().join();
+            getAllOrganEmployee().join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        buttons = new Button[statementList.size()];
-        for (int i = 0; i < statementList.size(); i++) {
+        buttons = new Button[organ_employees.size()];
+        for (int i = 0; i < organ_employees.size(); i++) {
             int buttonStyle = R.drawable.button;
             buttons[i] = new Button(getApplicationContext());
-            String text = statementList.get(i).id_statement + "";
+            String text = organ_employees.get(i).lastname + " " + organ_employees.get(i).firstname + " " + organ_employees.get(i).middle_name;
             buttons[i].setText(text);
-            buttons[i].setId(800 + i);
+            buttons[i].setId(900 + i);
             buttons[i].setBackgroundResource(buttonStyle);
             buttons[i].setTextColor(getResources().getColor(R.color.white));
             buttons[i].setOnClickListener(v -> {
-                Intent intent = new Intent(StatementActivity.this, CurrentStatementActivity.class);
-                intent.putExtra("currentStatement", statementList.get(v.getId() - 800));
+                Intent intent = new Intent(Organ_EmployeeActivity.this, CurrentOrganEmployeeActivity.class);
+                intent.putExtra("currentOrganEmployee", organ_employees.get(v.getId() - 900));
                 startActivity(intent);
             });
 
@@ -96,10 +88,10 @@ public class StatementActivity extends AppCompatActivity {
             if (i != 0) {
                 buttonParams.addRule(RelativeLayout.BELOW, buttons[i - 1].getId());
             } else {
-                buttonParams.addRule(RelativeLayout.BELOW, addStatement.getId());
+                buttonParams.addRule(RelativeLayout.BELOW, listName.getId());
             }
 
-            relativeLayoutStatementForButtons.addView(buttons[i], buttonParams);
+            relativeLayoutOrganEmployeeForButtons.addView(buttons[i], buttonParams);
         }
     }
 
@@ -109,8 +101,8 @@ public class StatementActivity extends AppCompatActivity {
         setButtonsData();
     }
 
-    private synchronized Thread getAllStatements() {
-        Thread thread = new Thread(() -> statementList = CursachDatabase.getInstance(getApplicationContext()).statementDao().getAll());
+    private synchronized Thread getAllOrganEmployee() {
+        Thread thread = new Thread(() -> organ_employees = CursachDatabase.getInstance(getApplicationContext()).organ_employeeDao().getAll());
         thread.start();
         return thread;
     }

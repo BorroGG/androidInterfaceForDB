@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddVictimActivity">
+    tools:context=".AddStatementActivity">
 
     <LinearLayout
         android:id="@+id/line1"
@@ -17,8 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
             android:maxLength="25"
+            android:layout_marginTop="10dp"
             android:gravity="start"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -44,7 +44,7 @@
         android:layout_below="@+id/line1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="@string/addingVictim"
+        android:text="@string/addingStatement"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -59,125 +59,61 @@
             android:layout_height="wrap_content" >
 
             <EditText
-                android:id="@+id/surname"
+                android:id="@+id/etId_statement"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
-                android:hint="@string/surname"
+                android:hint="@string/id_statement"
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/etRegistration_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/surname"
+                android:layout_below="@+id/etId_statement"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
-                android:hint="@string/name"
+                android:hint="@string/Registration_date"
                 android:inputType="textPersonName" />
 
             <EditText
-                android:id="@+id/middleName"
+                android:id="@+id/etAdditional_information"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/name"
+                android:layout_below="@+id/etRegistration_date"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:ems="10"
-                android:hint="@string/middleName"
+                android:hint="@string/Additional_information"
                 android:inputType="textPersonName" />
 
             <Spinner
-                android:id="@+id/genderSpinner"
+                android:id="@+id/id_victimSpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/middleName"
+                android:layout_below="@+id/etAdditional_information"
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"/>
 
-            <EditText
-                android:id="@+id/birthday"
-                android:layout_width="match_parent"
+            <Spinner
+                android:id="@+id/id_organ_employeeSpinner"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/genderSpinner"
-                android:layout_marginLeft="20dp"
+                android:layout_below="@+id/id_victimSpinner"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="@string/birthday"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/passport"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/birthday"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="@string/passport"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/citizenship"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/passport"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="@string/citizenship"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/social_status"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/citizenship"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="@string/social_status"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/official_position"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/social_status"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="@string/official_position"
-                android:inputType="textPersonName" />
-
-            <EditText
-                android:id="@+id/phoneCommon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/official_position"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="@string/phoneCommon"
-                android:inputType="textPersonName" />
+                android:layout_centerHorizontal="true"/>
 
             <Button
                 android:id="@+id/acceptReg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/phoneCommon"
+                android:layout_below="@+id/id_organ_employeeSpinner"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
@@ -185,5 +121,4 @@
                 android:text="@string/acceptReg" />
         </RelativeLayout>
     </ScrollView>
-
 </RelativeLayout>

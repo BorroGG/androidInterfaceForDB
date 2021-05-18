@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StatementActivity">
+    tools:context=".AddSentenceActivity">
 
     <LinearLayout
-        android:id="@+id/line"
+        android:id="@+id/line1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true">
@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:maxLength="25"
             android:gravity="start"
+            android:maxLength="25"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -38,37 +38,59 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/mainMenuText"
+        android:id="@+id/currentName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/line"
+        android:layout_below="@+id/line1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="@string/statement"
+        android:text="@string/addingSentence"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/addStatement"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mainMenuText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:text="@string/addStatement" />
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/addStatement"
-        android:layout_centerHorizontal="true">
+        android:layout_below="@+id/currentName">
 
         <RelativeLayout
-            android:id="@+id/relativeLayoutStatementForButtons"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content" >
 
+            <EditText
+                android:id="@+id/etDate_of_issue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/date_of_issue"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/etContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etDate_of_issue"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:hint="@string/content"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/acceptReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etContent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/acceptReg" />
         </RelativeLayout>
     </ScrollView>
 
