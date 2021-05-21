@@ -93,7 +93,7 @@ public abstract class CursachDatabase extends RoomDatabase {
 
                     INSTANCE = Room
                             .databaseBuilder(context.getApplicationContext(),
-                                    CursachDatabase.class, "cursach_db6")
+                                    CursachDatabase.class, "cursach_db7")
                             .addCallback(rdc)
                             .build();
                 }
@@ -141,7 +141,7 @@ public abstract class CursachDatabase extends RoomDatabase {
                     "('003301', 'Чупракова', 'Любовь', 'Алексеевна', 'Прокурор', 'Генерал-лейтенант юстиции', '4956574461', 2, 3, '$2a$10$lOahUgBJo63.elDoJEO8GOixY9Dql.EgIsZ2XhXHYbXV8X4jepKCu', 'chuprakova_love')," +
                     "('004401', 'Теплухин', 'Павел', 'Игнатьевич', 'Оперуполномоченный', 'Капитан внутренней службы', '4957714440', 1, 4, '$2a$10$i/DjDHVQPCm1ZREkT38IE.PaHBj.r1b6PEFUpYtwAJypb9KBFvQK.', 'teplukhin_pavel')," +
                     "('005501', 'Райков', 'Александр', 'Егорович', 'Следователь', 'Подполковник юстиции', '4958118915', 3, 5, '$2a$10$Clv.XnsAl6CPRIM1ZsBOVeUysTbxpjFOpYkxnS8ukoyF88zAHf2ZG', 'raikov_aleksander')," +
-                    "('777777', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 'Admin', 0, 0, '$2a$10$J/x2SyXnqNBXHl7XbDivNee0SkE6nAvoUKH679QUcTuyiXmIz2F0G', 'kotik_igor')");
+                    "('777', 'Кот', 'Игорь', 'Александрович', 'Администратор', 'Администратор', '79099384712', 0, 0, '$2a$10$J/x2SyXnqNBXHl7XbDivNee0SkE6nAvoUKH679QUcTuyiXmIz2F0G', 'kotik_igor')");
             db.execSQL("INSERT INTO Statement VALUES" +
                     "(101, '2021-03-03', 'Рост: 170-175, среднего телосложения, волосы светлые, на вид 40-45 лет. Губы тонкие, на верхней челюсти золотой зуб.', 1, '001101')," +
                     "(102, '2021-03-10', 'Рост: 180-185, худощавого телосложения, волосы русые, подбородок квадратной формы. На правой ноге на голени большой синяк.', 2, '002201')," +

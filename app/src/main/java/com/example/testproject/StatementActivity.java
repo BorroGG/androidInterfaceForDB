@@ -47,7 +47,9 @@ public class StatementActivity extends AppCompatActivity {
         tvUserName.setText(UserData.getYouLogAs());
 
         if (!UserData.isDutyOfficer()) {
-            addStatement.setVisibility(View.GONE);
+            if (UserData.ROLE_ID != 0) {
+                addStatement.setVisibility(View.GONE);
+            }
         }
 
         addStatement.setOnClickListener(v -> {

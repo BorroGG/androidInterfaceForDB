@@ -28,6 +28,9 @@ public interface SentenceDao {
     @Query("SELECT date_of_issue FROM sentence WHERE id_sentence = :id_sent")
     String getDate_Of_Issue(int id_sent);
 
+    @Query("SELECT id_sentence FROM sentence")
+    List<Integer> getIds();
+
     @Insert
     void insertAll(Sentence... users);
 

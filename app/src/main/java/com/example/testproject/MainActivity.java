@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 List<Organ_employee> organ_employees = CursachDatabase.getInstance(getApplicationContext()).organ_employeeDao().getAll();
                 for (Organ_employee organ_employee : organ_employees) {
                     if (login.equals(organ_employee.login) && BCrypt.checkpw(pass, organ_employee.password)) {
-                        if ((UserData.ROLE_ID == 0 && organ_employee.position.equals("Admin")) || UserData.ROLE_ID == 1) {
+                        if ((UserData.ROLE_ID == 0 && organ_employee.position.equals("Администратор")) || UserData.ROLE_ID == 1) {
                             UserData.CURRENT_USER_EMPL = organ_employee;
                             Intent menuIntent = new Intent(MainActivity.this, MenuActivity.class);
                             startActivity(menuIntent);

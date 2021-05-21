@@ -27,7 +27,7 @@ public class VictimActivity extends AppCompatActivity {
     private volatile List<Victim> victimList = new ArrayList<>();
     Button[] buttons;
     Button addVictim;
-    private RelativeLayout relativeLayout, relativeLayoutVictimForButtons;
+    private RelativeLayout relativeLayoutVictimForButtons;
     TextView tvUserName, tvExit;
 
 
@@ -36,7 +36,6 @@ public class VictimActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_victim);
 
-        relativeLayout = findViewById(R.id.relativeLayoutVictim);
         relativeLayoutVictimForButtons = findViewById(R.id.relativeLayoutVictimForButtons);
         addVictim = findViewById(R.id.addVictim);
         tvUserName = findViewById(R.id.userNameText);
@@ -49,7 +48,9 @@ public class VictimActivity extends AppCompatActivity {
         tvUserName.setText(UserData.getYouLogAs());
 
         if (!UserData.isDutyOfficer()) {
-            addVictim.setVisibility(View.GONE);
+            if (UserData.ROLE_ID != 0) {
+                addVictim.setVisibility(View.GONE);
+            }
         }
 
         addVictim.setOnClickListener(v -> {

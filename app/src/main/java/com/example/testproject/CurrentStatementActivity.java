@@ -58,8 +58,10 @@ public class CurrentStatementActivity extends AppCompatActivity {
         tvCurrentName.setText(currentNameText);
 
         if (!UserData.isDutyOfficer()) {
-            editStatement.setVisibility(View.GONE);
-            deleteStatement.setVisibility(View.GONE);
+            if (UserData.ROLE_ID != 0) {
+                editStatement.setVisibility(View.GONE);
+                deleteStatement.setVisibility(View.GONE);
+            }
         }
 
         editStatement.setOnClickListener(v -> {

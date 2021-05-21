@@ -12,7 +12,7 @@ public class UserData {
     public static boolean isDutyOfficer() {
         if (ROLE_ID == 2) {
             return false;
-        } else return CURRENT_USER_EMPL.position.equals("Дежурный в ДЧ") || CURRENT_USER_EMPL.position.equals("Admin");
+        } else return CURRENT_USER_EMPL.position.equals("Дежурный в ДЧ");
     }
     private static String createYOU_LOG_AS() {
         if (CURRENT_USER_EMPL == null && CURRENT_USER_JUDGE == null) {

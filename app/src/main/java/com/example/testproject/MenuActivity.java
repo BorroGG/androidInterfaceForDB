@@ -37,7 +37,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
         btnSentence = findViewById(R.id.sentence);
         btnSentence.setVisibility(UserData.ROLE_ID == 1 ? View.GONE : View.VISIBLE);
         btnPeriod = findViewById(R.id.period);
-        btnSentence.setVisibility(UserData.ROLE_ID == 1 ? View.GONE : View.VISIBLE);
+        btnPeriod.setVisibility(UserData.ROLE_ID == 1 ? View.GONE : View.VISIBLE);
 
         btnVictim.setOnClickListener(this);
         btnStatement.setOnClickListener(this);

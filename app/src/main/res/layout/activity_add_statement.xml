@@ -101,19 +101,11 @@
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"/>
 
-            <Spinner
-                android:id="@+id/id_organ_employeeSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/id_victimSpinner"
-                android:layout_marginTop="20dp"
-                android:layout_centerHorizontal="true"/>
-
             <Button
                 android:id="@+id/acceptReg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/id_organ_employeeSpinner"
+                android:layout_below="@+id/id_victimSpinner"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"

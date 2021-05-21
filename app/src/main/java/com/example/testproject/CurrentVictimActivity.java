@@ -66,8 +66,10 @@ public class CurrentVictimActivity extends AppCompatActivity {
         tvCurrentName.setText(currentNameText);
 
         if (!UserData.isDutyOfficer()) {
-            editVictim.setVisibility(View.GONE);
-            deleteVictim.setVisibility(View.GONE);
+            if (UserData.ROLE_ID != 0) {
+                editVictim.setVisibility(View.GONE);
+                deleteVictim.setVisibility(View.GONE);
+            }
         }
 
         editVictim.setOnClickListener(v -> {

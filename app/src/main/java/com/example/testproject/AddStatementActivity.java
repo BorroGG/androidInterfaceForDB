@@ -25,10 +25,9 @@ public class AddStatementActivity extends AppCompatActivity {
 
     EditText etId_statement, etRegistration_date, etAdditional_information;
     Button btnAccept;
-    Spinner id_victimSpinner, id_organ_employeeSpinner;
+    Spinner id_victimSpinner;
     TextView tvUserName, tvExit;
     int id_victim;
-    int id_organ_employee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,6 @@ public class AddStatementActivity extends AppCompatActivity {
         etRegistration_date = findViewById(R.id.etRegistration_date);
         etAdditional_information = findViewById(R.id.etAdditional_information);
         id_victimSpinner = findViewById(R.id.id_victimSpinner);
-        id_organ_employeeSpinner = findViewById(R.id.id_organ_employeeSpinner);
 
         tvUserName = findViewById(R.id.userNameText);
         tvExit = findViewById(R.id.exitText);
@@ -58,17 +56,17 @@ public class AddStatementActivity extends AppCompatActivity {
         });
 
         createVictimSpinner();
-        createOrgan_EmployeeSpinner();
 
     }
 
     private void insertVictim() {
         new Thread(() -> {
             Statement statement = new Statement();
+            statement.id_statement = Integer.parseInt(etId_statement.getText().toString());
             statement.registration_date = etRegistration_date.getText().toString();
             statement.additional_information = etAdditional_information.getText().toString();
             statement.id_victim = id_victim;
-            statement.id_organ_employee = id_organ_employee + "";
+            statement.id_organ_employee = UserData.CURRENT_USER_EMPL.id_organ_employee + "";
 
             CursachDatabase.getInstance(getApplicationContext()).statementDao().insertAll(statement);
         }).start();
@@ -94,36 +92,6 @@ public class AddStatementActivity extends AppCompatActivity {
                     String item = (String) parent.getItemAtPosition(position);
                     String[] string = item.split(",");
                     id_victim = Integer.parseInt(string[0]);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
-        }).start();
-    }
-
-    private void createOrgan_EmployeeSpinner() {
-        new Thread(() -> {
-            List<Organ_employee> organEmployees = CursachDatabase.getInstance(getApplicationContext()).organ_employeeDao().getAll();
-            String[] organEmployeesStrings = new String[organEmployees.size()];
-            for (int i = 0; i < organEmployeesStrings.length; i++) {
-                organEmployeesStrings[i] = organEmployees.get(i).id_organ_employee + ", " + organEmployees.get(i).lastname + " " + organEmployees.get(i).firstname + " " + organEmployees.get(i).middle_name;
-            }
-
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, organEmployeesStrings);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
-            id_organ_employeeSpinner.setAdapter(adapter);
-            id_organ_employeeSpinner.setDropDownHorizontalOffset(10);
-            id_organ_employeeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String item = (String) parent.getItemAtPosition(position);
-                    String[] string = item.split(",");
-                    id_organ_employee = Integer.parseInt(string[0]);
                 }
 
                 @Override

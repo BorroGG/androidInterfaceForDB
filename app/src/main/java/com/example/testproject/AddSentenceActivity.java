@@ -4,18 +4,31 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.testproject.db.CursachDatabase;
+import com.example.testproject.db.entities.Criminal_case;
 import com.example.testproject.db.entities.Sentence;
+import com.example.testproject.db.entities.Victim;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class AddSentenceActivity extends AppCompatActivity {
 
     EditText date_of_issue, content;
     Button btnAccept;
     TextView tvUserName, tvExit;
+    Spinner spinnerIdSentenceAndIdCases;
+    int idSentence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +37,7 @@ public class AddSentenceActivity extends AppCompatActivity {
 
         date_of_issue = findViewById(R.id.etDate_of_issue);
         content = findViewById(R.id.etContent);
+        spinnerIdSentenceAndIdCases = findViewById(R.id.spinnerIdSentenceAndIdCases);
 
         tvUserName = findViewById(R.id.userNameText);
         tvExit = findViewById(R.id.exitText);
@@ -36,20 +50,61 @@ public class AddSentenceActivity extends AppCompatActivity {
         btnAccept = findViewById(R.id.acceptReg);
 
         btnAccept.setOnClickListener(v -> {
-            insertVictim();
+            insertSentence();
             Intent intent = new Intent(AddSentenceActivity.this, SentenceActivity.class);
             startActivity(intent);
         });
+
+        createIdSpinner();
     }
 
-    private void insertVictim() {
+    private void insertSentence() {
         new Thread(() -> {
             Sentence sentence = new Sentence();
+            sentence.id_sentence = idSentence;
             sentence.date_of_issue = date_of_issue.getText().toString();
             sentence.content = content.getText().toString();
             sentence.id_judge = (UserData.ROLE_ID == 2 ? UserData.CURRENT_USER_JUDGE.id_judge : "0");
 
             CursachDatabase.getInstance(getApplicationContext()).sentenceDao().insertAll(sentence);
+        }).start();
+    }
+
+    private void createIdSpinner() {
+        new Thread(() -> {
+            List<Criminal_case> criminal_cases = CursachDatabase.getInstance(getApplicationContext()).criminal_caseDao().getAll();
+            List<Integer> sentencesIds = CursachDatabase.getInstance(getApplicationContext()).sentenceDao().getIds();
+
+            List<String> tempStrings = new ArrayList<>();
+            for (int i = 0; i < criminal_cases.size(); i++) {
+                if (!sentencesIds.contains(criminal_cases.get(i).id_criminal_case)) {
+                    tempStrings.add(criminal_cases.get(i).id_criminal_case + "");
+                }
+            }
+            String[] criminal_casesStrings = new String[tempStrings.size()];
+            for (int i = 0; i < tempStrings.size(); i++) {
+                criminal_casesStrings[i] = tempStrings.get(i);
+            }
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, criminal_casesStrings);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+            spinnerIdSentenceAndIdCases.setAdapter(adapter);
+            spinnerIdSentenceAndIdCases.setDropDownHorizontalOffset(10);
+            spinnerIdSentenceAndIdCases.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    String item = (String) parent.getItemAtPosition(position);
+                    String[] string = item.split(",");
+                    idSentence = Integer.parseInt(string[0]);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }).start();
     }
 }
