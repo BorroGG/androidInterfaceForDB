@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TestProject">
-        <activity android:name=".CurrentPeriodSentenceActivity"></activity>
+        <activity android:name=".CurrentCriminal_caseNotReadyActivity"></activity>
+        <activity android:name=".Criminal_caseNotReadyActivity" />
+        <activity android:name=".ChooseCriminal_caseActivity" />
+        <activity android:name=".CurrentPeriodSentenceActivity" />
         <activity android:name=".PeriodSentenceActivity" />
         <activity android:name=".AddSentenceActivity" />
         <activity android:name=".CurrentSentenceActivity" />

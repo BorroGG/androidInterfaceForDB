@@ -12,15 +12,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.testproject.db.entities.CustomEntityForCriminal_case;
+import com.example.testproject.db.entities.EntityForCriminal_caseAndJudge;
 
-public class CurrentCriminal_caseActivity extends AppCompatActivity {
+public class CurrentCriminal_caseNotReadyActivity extends AppCompatActivity {
 
     TextView tvUserName, tvExit, tvCurrentName;
-    CustomEntityForCriminal_case currentCustomEntity;
+    EntityForCriminal_caseAndJudge currentCustomEntity;
     EditText[] editTexts;
     TextView[] textViews;
     RelativeLayout relativeLayoutCurrentCriminal_caseEditTexts;
-    LinearLayout[] textLayouts = new LinearLayout[11];
+    LinearLayout[] textLayouts = new LinearLayout[7];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class CurrentCriminal_caseActivity extends AppCompatActivity {
 
         Bundle arguments = getIntent().getExtras();
 
-        currentCustomEntity = (CustomEntityForCriminal_case) arguments.get("currentCustomEntity");
+        currentCustomEntity = (EntityForCriminal_caseAndJudge) arguments.get("currentCustomEntity");
 
         textLayouts[0] = findViewById(R.id.lineText1);
         textLayouts[1] = findViewById(R.id.lineText2);
@@ -38,21 +39,17 @@ public class CurrentCriminal_caseActivity extends AppCompatActivity {
         textLayouts[4] = findViewById(R.id.lineText5);
         textLayouts[5] = findViewById(R.id.lineText6);
         textLayouts[6] = findViewById(R.id.lineText7);
-        textLayouts[7] = findViewById(R.id.lineText8);
-        textLayouts[8] = findViewById(R.id.lineText9);
-        textLayouts[9] = findViewById(R.id.lineText10);
-        textLayouts[10] = findViewById(R.id.lineText11);
 
         tvCurrentName = findViewById(R.id.currentName);
         relativeLayoutCurrentCriminal_caseEditTexts = findViewById(R.id.relativeLayoutCurrentCriminal_caseEditTexts);
         tvUserName = findViewById(R.id.userNameText);
         tvExit = findViewById(R.id.exitText);
         tvExit.setOnClickListener(v -> {
-            Intent intent = new Intent(CurrentCriminal_caseActivity.this, MainActivity.class);
+            Intent intent = new Intent(CurrentCriminal_caseNotReadyActivity.this, MainActivity.class);
             startActivity(intent);
         });
         tvUserName.setText(UserData.getYouLogAs());
-        String currentNameText = String.valueOf(currentCustomEntity.cc_id_criminal_case);
+        String currentNameText = String.valueOf(currentCustomEntity.id_criminal_case);
         tvCurrentName.setText(currentNameText);
 
         setCriminal_caseDataText();
@@ -60,37 +57,26 @@ public class CurrentCriminal_caseActivity extends AppCompatActivity {
     }
 
     private void setCriminal_caseDataText() {
-        String[] criminal_caseData = new String[11];
-        criminal_caseData[0] = String.valueOf(currentCustomEntity.cc_id_criminal_case);
-        criminal_caseData[1] = currentCustomEntity.cc_date_of_excitement;
-        criminal_caseData[2] = currentCustomEntity.cc_date_of_filing;
-        criminal_caseData[3] = currentCustomEntity.oe_lastname + " " + currentCustomEntity.oe_firstname + " " + currentCustomEntity.oe_middle_name;
-        criminal_caseData[4] = currentCustomEntity.oe_rank;
-        criminal_caseData[5] = currentCustomEntity.c_date_and_time_of_crime;
-        criminal_caseData[6] = "Ст. " + currentCustomEntity.qoc_article
-                + "." + currentCustomEntity.qoc_sign
-                + " Ч." + currentCustomEntity.qoc_part
-                + " П." + currentCustomEntity.qoc_item;
-        criminal_caseData[7] = currentCustomEntity.co_title;
-        criminal_caseData[8] = currentCustomEntity.j_lastname + " " + currentCustomEntity.j_firstname + " " + currentCustomEntity.j_middle_name;
-        criminal_caseData[9] = currentCustomEntity.s_date_of_issue;
-        criminal_caseData[10] = currentCustomEntity.s_content;
+        String[] criminal_caseData = new String[7];
+        criminal_caseData[0] = String.valueOf(currentCustomEntity.id_criminal_case);
+        criminal_caseData[1] = currentCustomEntity.date_of_excitement;
+        criminal_caseData[2] = currentCustomEntity.date_of_filing;
+        criminal_caseData[3] = String.valueOf(currentCustomEntity.id_statement);
+        criminal_caseData[4] = currentCustomEntity.id_organ_employee;
+        criminal_caseData[5] = String.valueOf(currentCustomEntity.id_court);
+        criminal_caseData[6] = currentCustomEntity.id_judge;
 
-        String[] criminal_caseSupportData = new String[11];
+        String[] criminal_caseSupportData = new String[7];
         criminal_caseSupportData[0] = "Номер уголовного дела: ";
         criminal_caseSupportData[1] = "Дата возбуждения: ";
         criminal_caseSupportData[2] = "Дата сдачи в архив: ";
-        criminal_caseSupportData[3] = "ФИО сотрудника органов: ";
-        criminal_caseSupportData[4] = "Должность сотрудника: ";
-        criminal_caseSupportData[5] = "Дата и время совершения преступления: ";
-        criminal_caseSupportData[6] = "Квалификация преступления: ";
-        criminal_caseSupportData[7] = "Название суда: ";
-        criminal_caseSupportData[8] = "ФИО судьи: ";
-        criminal_caseSupportData[9] = "Дата вынесения приговора: ";
-        criminal_caseSupportData[10] = "Содержание приговора: ";
+        criminal_caseSupportData[3] = "Номер заявления: ";
+        criminal_caseSupportData[4] = "Номер сотрудника органов: ";
+        criminal_caseSupportData[5] = "Номер суда: ";
+        criminal_caseSupportData[6] = "Номер судьи: ";
 
-        editTexts = new EditText[11];
-        textViews = new TextView[11];
+        editTexts = new EditText[7];
+        textViews = new TextView[7];
         for (int i = 0; i < editTexts.length; i++) {
             textLayouts[i].removeAllViews();
 

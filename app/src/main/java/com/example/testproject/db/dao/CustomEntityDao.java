@@ -4,7 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Query;
 import androidx.room.Transaction;
 
-import com.example.testproject.db.entities.CustomEntity;
+import com.example.testproject.db.entities.CustomEntityForCriminal_case;
 
 import java.util.List;
 
@@ -29,5 +29,5 @@ public interface CustomEntityDao {
             "       JOIN qualification_of_crime qoc ON c.id_qualification_of_crime = qoc.id_qualification_of_crime" +
             "       JOIN court co ON cc.id_court = co.id_court" +
             "   WHERE c.id_criminal_case = id_sentence")
-    List<CustomEntity> loadCustomEntityNamesForUs();
+    List<CustomEntityForCriminal_case> loadCustomEntityNamesForUs();
 }

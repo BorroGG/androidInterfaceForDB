@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TestProject</string>
+    <string name="app_name">Учет уголовных дел</string>
     <string name="helloStr">Добро пожаловать!</string>
     <string name="plsEnter">Войдите или зарегистрируйтесь</string>
     <string name="login">Логин</string>
@@ -73,6 +73,9 @@
     <string name="sign">Знак</string>
     <string name="part">Часть</string>
     <string name="item">Пункт</string>
+
+    <string name="CompleteCriminal_case">Завершенные</string>
+    <string name="NotCompleteCriminal_case">Незавершенные</string>
 
 
     <string name="title_activity_register">RegisterActivity</string>

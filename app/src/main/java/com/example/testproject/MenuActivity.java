@@ -72,7 +72,7 @@ public class MenuActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(intentOrgan_Employee);
                 break;
             case R.id.criminal_case:
-                Intent intentCriminal_case = new Intent(MenuActivity.this, Criminal_caseActivity.class);
+                Intent intentCriminal_case = new Intent(MenuActivity.this, ChooseCriminal_caseActivity.class);
                 startActivity(intentCriminal_case);
                 break;
             case R.id.accused:

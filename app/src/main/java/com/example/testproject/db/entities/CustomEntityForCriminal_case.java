@@ -2,7 +2,7 @@ package com.example.testproject.db.entities;
 
 import java.io.Serializable;
 
-public class CustomEntity implements Serializable {
+public class CustomEntityForCriminal_case implements Serializable {
 
     public String cc_id_criminal_case;
     public String cc_date_of_excitement;

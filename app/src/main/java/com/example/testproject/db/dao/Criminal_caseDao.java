@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.testproject.db.entities.Criminal_case;
+import com.example.testproject.db.entities.EntityForCriminal_caseAndJudge;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +18,15 @@ import io.reactivex.rxjava3.core.Single;
 public interface Criminal_caseDao  {
     @Query("SELECT * FROM Criminal_case")
     List<Criminal_case> getAll();
+
+    @Query("SELECT c.id_criminal_case AS id_criminal_case, j.id_judge AS id_judge, " +
+            "c.date_of_excitement AS date_of_excitement, c.date_of_filing AS date_of_filing, " +
+            "c.id_statement AS id_statement, c.id_organ_employee AS id_organ_employee, " +
+            "c.id_court AS id_court " +
+            "FROM Criminal_case c " +
+            "JOIN Judge j on c.id_judge = j.id_judge " +
+            "WHERE c.date_of_filing = NULL OR c.date_of_filing = '' ")
+    List<EntityForCriminal_caseAndJudge> getAllWithJudgeAndNotComplete();
 
     @Query("SELECT * FROM Criminal_case WHERE id_criminal_case IN (:userIds)")
     List<Criminal_case> loadAllByIds(int[] userIds);

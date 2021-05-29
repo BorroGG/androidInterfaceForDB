@@ -13,42 +13,43 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.Sentence;
+import com.example.testproject.db.entities.CustomEntityForCriminal_case;
+import com.example.testproject.db.entities.EntityForCriminal_caseAndJudge;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SentenceActivity extends AppCompatActivity {
+public class Criminal_caseNotReadyActivity extends AppCompatActivity {
 
-    private volatile List<Sentence> sentenceList = new ArrayList<>();
+    private volatile List<EntityForCriminal_caseAndJudge> customEntities = new ArrayList<>();
     Button[] buttons;
-    Button addSentence;
-    private RelativeLayout relativeLayoutSentenceForButtons;
+    Button addCriminal_case;
+    private RelativeLayout relativeLayoutCriminal_caseForButtons;
     TextView tvUserName, tvExit;
 
 
     @Override
     protected synchronized void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sentence);
+        setContentView(R.layout.activity_criminal_case_not_ready);
 
-        relativeLayoutSentenceForButtons = findViewById(R.id.relativeLayoutSentenceForButtons);
-        addSentence = findViewById(R.id.addSentence);
+        relativeLayoutCriminal_caseForButtons = findViewById(R.id.relativeLayoutCriminal_caseForButtons);
+        addCriminal_case = findViewById(R.id.addCriminal_case);
         tvUserName = findViewById(R.id.userNameText);
         tvExit = findViewById(R.id.exitText);
         tvExit.setOnClickListener(v -> {
-            Intent intent = new Intent(SentenceActivity.this, MainActivity.class);
+            Intent intent = new Intent(Criminal_caseNotReadyActivity.this, MainActivity.class);
             startActivity(intent);
         });
 
         tvUserName.setText(UserData.getYouLogAs());
 
-        if (UserData.ROLE_ID == 1) {
-            addSentence.setVisibility(View.GONE);
+        if (UserData.ROLE_ID == 2) {
+            addCriminal_case.setVisibility(View.GONE);
         }
 
-        addSentence.setOnClickListener(v -> {
-            Intent intent = new Intent(SentenceActivity.this, AddSentenceActivity.class);
+        addCriminal_case.setOnClickListener(v -> {
+            Intent intent = new Intent(Criminal_caseNotReadyActivity.this, AddCriminal_caseActivity.class);
             startActivity(intent);
         });
 
@@ -57,26 +58,26 @@ public class SentenceActivity extends AppCompatActivity {
     @SuppressLint("ResourceType")
     private void setButtonsData() {
 
-        relativeLayoutSentenceForButtons.removeAllViews();
+        relativeLayoutCriminal_caseForButtons.removeAllViews();
 
         try {
-            getAllSentence().join();
+            getAllCriminal_case().join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        buttons = new Button[sentenceList.size()];
-        for (int i = 0; i < sentenceList.size(); i++) {
+        buttons = new Button[customEntities.size()];
+        for (int i = 0; i < customEntities.size(); i++) {
             int buttonStyle = R.drawable.button;
             buttons[i] = new Button(getApplicationContext());
-            String text = sentenceList.get(i).id_sentence + "";
+            String text = String.valueOf(customEntities.get(i).id_criminal_case);
             buttons[i].setText(text);
-            buttons[i].setId(500 + i);
+            buttons[i].setId(400 + i);
             buttons[i].setBackgroundResource(buttonStyle);
             buttons[i].setTextColor(getResources().getColor(R.color.white));
             buttons[i].setOnClickListener(v -> {
-                Intent intent = new Intent(SentenceActivity.this, CurrentSentenceActivity.class);
-                intent.putExtra("currentSentence", sentenceList.get(v.getId() - 500));
+                Intent intent = new Intent(Criminal_caseNotReadyActivity.this, CurrentCriminal_caseNotReadyActivity.class);
+                intent.putExtra("currentCustomEntity", customEntities.get(v.getId() - 400));
                 startActivity(intent);
             });
 
@@ -94,10 +95,10 @@ public class SentenceActivity extends AppCompatActivity {
             if (i != 0) {
                 buttonParams.addRule(RelativeLayout.BELOW, buttons[i - 1].getId());
             } else {
-                buttonParams.addRule(RelativeLayout.BELOW, addSentence.getId());
+                buttonParams.addRule(RelativeLayout.BELOW, addCriminal_case.getId());
             }
 
-            relativeLayoutSentenceForButtons.addView(buttons[i], buttonParams);
+            relativeLayoutCriminal_caseForButtons.addView(buttons[i], buttonParams);
         }
     }
 
@@ -107,17 +108,17 @@ public class SentenceActivity extends AppCompatActivity {
         setButtonsData();
     }
 
-    private synchronized Thread getAllSentence() {
+    private synchronized Thread getAllCriminal_case() {
         Thread thread = new Thread(() -> {
-            sentenceList = CursachDatabase.getInstance(getApplicationContext()).sentenceDao().getAll();
+            customEntities = CursachDatabase.getInstance(getApplicationContext()).criminal_caseDao().getAllWithJudgeAndNotComplete();
             if (UserData.ROLE_ID == 2) {
-                List<Sentence> sentences = new ArrayList<>();
-                for (int i = 0; i < sentenceList.size(); i++) {
-                    if (sentenceList.get(i).id_judge.equals(UserData.CURRENT_USER_JUDGE.id_judge)) {
-                        sentences.add(sentenceList.get(i));
+                List<EntityForCriminal_caseAndJudge> customEntitiesTemp = new ArrayList<>();
+                for (int i = 0; i < customEntities.size(); i++) {
+                    if (customEntities.get(i).id_judge.equals(UserData.CURRENT_USER_JUDGE.id_judge)) {
+                        customEntitiesTemp.add(customEntities.get(i));
                     }
                 }
-                sentenceList = sentences;
+                customEntities = customEntitiesTemp;
             }
         });
         thread.start();

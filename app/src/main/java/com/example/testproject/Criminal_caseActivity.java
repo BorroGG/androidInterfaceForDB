@@ -13,14 +13,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.CustomEntity;
+import com.example.testproject.db.entities.CustomEntityForCriminal_case;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Criminal_caseActivity extends AppCompatActivity {
 
-    private volatile List<CustomEntity> customEntities = new ArrayList<>();
+    private volatile List<CustomEntityForCriminal_case> customEntities = new ArrayList<>();
     Button[] buttons;
     Button addCriminal_case;
     private RelativeLayout relativeLayoutCriminal_caseForButtons;
@@ -111,7 +111,7 @@ public class Criminal_caseActivity extends AppCompatActivity {
         Thread thread = new Thread(() -> {
             customEntities = CursachDatabase.getInstance(getApplicationContext()).customEntityDao().loadCustomEntityNamesForUs();
             if (UserData.ROLE_ID == 2) {
-                List<CustomEntity> customEntitiesTemp = new ArrayList<>();
+                List<CustomEntityForCriminal_case> customEntitiesTemp = new ArrayList<>();
                 for (int i = 0; i < customEntities.size(); i++) {
                     if (customEntities.get(i).j_id_judge.equals(UserData.CURRENT_USER_JUDGE.id_judge)) {
                         customEntitiesTemp.add(customEntities.get(i));
