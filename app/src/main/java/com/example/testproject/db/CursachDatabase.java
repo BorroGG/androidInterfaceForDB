@@ -96,7 +96,7 @@ public abstract class CursachDatabase extends RoomDatabase {
 
                     INSTANCE = Room
                             .databaseBuilder(context.getApplicationContext(),
-                                    CursachDatabase.class, "db9")
+                                    CursachDatabase.class, "db10")
                             .addCallback(rdc)
                             .build();
                 }
