@@ -14,15 +14,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.Department;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Log;
-import com.example.testproject.db.entities.Organ_employee;
 import com.example.testproject.db.entities.Statement;
 import com.example.testproject.db.entities.Victim;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.List;
 
 public class AddStatementActivity extends AppCompatActivity {
@@ -75,14 +72,14 @@ public class AddStatementActivity extends AppCompatActivity {
             statement.id_victim = id_victim;
             statement.id_organ_employee = UserData.CURRENT_USER_EMPL.id_organ_employee + "";
 
-            CursachDatabase.getInstance(getApplicationContext()).statementDao().insertAll(statement);
-            CursachDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", UserData.getLogin(), Instant.now().toString(), android.os.Build.MODEL, "Add statement in db"));
+            ProgDatabase.getInstance(getApplicationContext()).statementDao().insertAll(statement);
+            ProgDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", UserData.getLogin(), Instant.now().toString(), android.os.Build.MODEL, "Add statement in db"));
         }).start();
     }
 
     private void createVictimSpinner() {
         new Thread(() -> {
-            List<Victim> victims = CursachDatabase.getInstance(getApplicationContext()).victimDao().getAll();
+            List<Victim> victims = ProgDatabase.getInstance(getApplicationContext()).victimDao().getAll();
             String[] victimStrings = new String[victims.size()];
             for (int i = 0; i < victimStrings.length; i++) {
                 victimStrings[i] = victims.get(i).id_victim + ", " + victims.get(i).lastname + " " + victims.get(i).firstname + " " + victims.get(i).middle_name;

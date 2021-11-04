@@ -6,16 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Sentence;
-import com.example.testproject.db.entities.Victim;
 
 public class CurrentSentenceActivity extends AppCompatActivity {
 
@@ -73,7 +71,7 @@ public class CurrentSentenceActivity extends AppCompatActivity {
 
                     currentSentence = sentence;
 
-                    CursachDatabase.getInstance(getApplicationContext()).sentenceDao().update(sentence);
+                    ProgDatabase.getInstance(getApplicationContext()).sentenceDao().update(sentence);
                 });
                 thread.start();
                 try {
@@ -87,7 +85,7 @@ public class CurrentSentenceActivity extends AppCompatActivity {
 
         });
         deleteSentence.setOnClickListener(v -> new Thread(() -> {
-            CursachDatabase.getInstance(getApplicationContext()).sentenceDao().delete(currentSentence);
+            ProgDatabase.getInstance(getApplicationContext()).sentenceDao().delete(currentSentence);
             Intent intent = new Intent(CurrentSentenceActivity.this, VictimActivity.class);
             startActivity(intent);
         }).start());

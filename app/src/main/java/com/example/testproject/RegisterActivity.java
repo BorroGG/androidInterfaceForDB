@@ -14,7 +14,7 @@ import android.widget.Spinner;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.testproject.db.CursachDatabase;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Department;
 import com.example.testproject.db.entities.Judge;
 import com.example.testproject.db.entities.Log;
@@ -24,7 +24,6 @@ import com.example.testproject.db.entities.Organ_employee;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -84,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void createDepartmentSpinner() {
         new Thread(() -> {
-            List<Department> departmentList = CursachDatabase.getInstance(getApplicationContext()).departmentDao().getAll();
+            List<Department> departmentList = ProgDatabase.getInstance(getApplicationContext()).departmentDao().getAll();
             String[] departmentStrings = new String[departmentList.size()];
             for (int i = 0; i < departmentStrings.length; i++) {
                 departmentStrings[i] = departmentList.get(i).id_department + ", " + departmentList.get(i).title_department;
@@ -114,7 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void createOrganSpinner() {
         new Thread(() -> {
-            List<Organ> organList = CursachDatabase.getInstance(getApplicationContext()).organDao().getAll();
+            List<Organ> organList = ProgDatabase.getInstance(getApplicationContext()).organDao().getAll();
             String[] organStrings = new String[organList.size()];
             for (int i = 0; i < organStrings.length; i++) {
                 organStrings[i] = organList.get(i).id_organ + ", " + organList.get(i).title_organ;
@@ -184,8 +183,8 @@ public class RegisterActivity extends AppCompatActivity {
                 organ_employee.id_department = idDepartment;
                 organ_employee.id_organ = idOrgan;
                 organ_employee.id_organ_employee = etIdUser.getText().toString();
-                CursachDatabase.getInstance(getApplicationContext()).organ_employeeDao().insert(organ_employee);
-                CursachDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", organ_employee.login, Instant.now().toString(), android.os.Build.MODEL, "Add new employee in db"));
+                ProgDatabase.getInstance(getApplicationContext()).organ_employeeDao().insert(organ_employee);
+                ProgDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", organ_employee.login, Instant.now().toString(), android.os.Build.MODEL, "Add new employee in db"));
             }
         });
         thread.start();
@@ -201,8 +200,8 @@ public class RegisterActivity extends AppCompatActivity {
             judge.login = etLogin.getText().toString();
             judge.password = BCrypt.hashpw(etPass.getText().toString(), BCrypt.gensalt());
             judge.id_judge = etIdUser.getText().toString();
-            CursachDatabase.getInstance(getApplicationContext()).judgeDao().insert(judge);
-            CursachDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", judge.login, Instant.now().toString(), android.os.Build.MODEL, "Add new judge in db"));
+            ProgDatabase.getInstance(getApplicationContext()).judgeDao().insert(judge);
+            ProgDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", judge.login, Instant.now().toString(), android.os.Build.MODEL, "Add new judge in db"));
         }).start();
     }
 

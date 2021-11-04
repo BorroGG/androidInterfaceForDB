@@ -14,17 +14,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Criminal_case;
 import com.example.testproject.db.entities.Log;
 import com.example.testproject.db.entities.Sentence;
-import com.example.testproject.db.entities.Victim;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class AddSentenceActivity extends AppCompatActivity {
@@ -73,15 +69,15 @@ public class AddSentenceActivity extends AppCompatActivity {
             sentence.content = content.getText().toString();
             sentence.id_judge = (UserData.ROLE_ID == 2 ? UserData.CURRENT_USER_JUDGE.id_judge : "0");
 
-            CursachDatabase.getInstance(getApplicationContext()).sentenceDao().insertAll(sentence);
-            CursachDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", UserData.getLogin(), Instant.now().toString(), android.os.Build.MODEL, "Add sentence in db"));
+            ProgDatabase.getInstance(getApplicationContext()).sentenceDao().insertAll(sentence);
+            ProgDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", UserData.getLogin(), Instant.now().toString(), android.os.Build.MODEL, "Add sentence in db"));
         }).start();
     }
 
     private void createIdSpinner() {
         new Thread(() -> {
-            List<Criminal_case> criminal_cases = CursachDatabase.getInstance(getApplicationContext()).criminal_caseDao().getAll();
-            List<Integer> sentencesIds = CursachDatabase.getInstance(getApplicationContext()).sentenceDao().getIds();
+            List<Criminal_case> criminal_cases = ProgDatabase.getInstance(getApplicationContext()).criminal_caseDao().getAll();
+            List<Integer> sentencesIds = ProgDatabase.getInstance(getApplicationContext()).sentenceDao().getIds();
 
             List<String> tempStrings = new ArrayList<>();
             for (int i = 0; i < criminal_cases.size(); i++) {

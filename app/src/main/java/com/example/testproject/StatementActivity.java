@@ -12,11 +12,8 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.Judge;
-import com.example.testproject.db.entities.Organ_employee;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Statement;
-import com.example.testproject.db.entities.Victim;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +109,7 @@ public class StatementActivity extends AppCompatActivity {
     }
 
     private synchronized Thread getAllStatements() {
-        Thread thread = new Thread(() -> statementList = CursachDatabase.getInstance(getApplicationContext()).statementDao().getAll());
+        Thread thread = new Thread(() -> statementList = ProgDatabase.getInstance(getApplicationContext()).statementDao().getAll());
         thread.start();
         return thread;
     }

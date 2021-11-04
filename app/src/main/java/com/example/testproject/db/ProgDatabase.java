@@ -55,7 +55,7 @@ import com.example.testproject.db.entities.Victim;
         Focus_category.class, Group_of_persons_directory.class, Judge.class, Organ.class,
         Organ_employee.class, Participants_in_crime.class, Qualification_of_crime.class,
         Reference_previously_convicted.class, Sentence.class, Statement.class, Victim.class, Log.class}, version = 1)
-public abstract class CursachDatabase extends RoomDatabase {
+public abstract class ProgDatabase extends RoomDatabase {
 
     public abstract AccusedDao accusedDao();
     public abstract Criminal_caseDao criminal_caseDao();
@@ -79,11 +79,11 @@ public abstract class CursachDatabase extends RoomDatabase {
     public abstract CustomEntityDao customEntityDao();
     public abstract LogDao logDao();
 
-    private static volatile CursachDatabase INSTANCE;
+    private static volatile ProgDatabase INSTANCE;
 
-    public static CursachDatabase getInstance(Context context) {
+    public static ProgDatabase getInstance(Context context) {
         if (INSTANCE == null) {
-            synchronized (CursachDatabase.class) {
+            synchronized (ProgDatabase.class) {
                 if (INSTANCE == null) {
                     RoomDatabase.Callback rdc = new RoomDatabase.Callback() {
                         public void onCreate (SupportSQLiteDatabase db) {
@@ -96,7 +96,7 @@ public abstract class CursachDatabase extends RoomDatabase {
 
                     INSTANCE = Room
                             .databaseBuilder(context.getApplicationContext(),
-                                    CursachDatabase.class, "db10")
+                                    ProgDatabase.class, "db10")
                             .addCallback(rdc)
                             .build();
                 }

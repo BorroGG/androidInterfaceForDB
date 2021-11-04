@@ -12,19 +12,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Accused;
 import com.example.testproject.db.entities.Category_of_crimes;
 import com.example.testproject.db.entities.Condition_of_committing;
 import com.example.testproject.db.entities.Court;
 import com.example.testproject.db.entities.Crime;
 import com.example.testproject.db.entities.Damage_category;
-import com.example.testproject.db.entities.Department;
 import com.example.testproject.db.entities.Focus_category;
 import com.example.testproject.db.entities.Group_of_persons_directory;
 import com.example.testproject.db.entities.Judge;
@@ -36,10 +33,7 @@ import com.example.testproject.db.entities.Qualification_of_crime;
 import com.example.testproject.db.entities.Reference_previously_convicted;
 import com.example.testproject.db.entities.Statement;
 
-import org.mindrot.jbcrypt.BCrypt;
-
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.List;
 
 public class AddCriminal_caseActivity extends AppCompatActivity {
@@ -149,8 +143,8 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
             criminal_case.id_court = idCourt;
             criminal_case.id_judge = idJudge;
 
-            id_criminal_case = (int) CursachDatabase.getInstance(getApplicationContext()).criminal_caseDao().insertAll(criminal_case)[0];
-            CursachDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", UserData.getLogin(), Instant.now().toString(), android.os.Build.MODEL, "Add criminal case in db"));
+            id_criminal_case = (int) ProgDatabase.getInstance(getApplicationContext()).criminal_caseDao().insertAll(criminal_case)[0];
+            ProgDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", UserData.getLogin(), Instant.now().toString(), android.os.Build.MODEL, "Add criminal case in db"));
 
             Accused accused = new Accused();
             accused.lastname = etSurname.getText().toString();
@@ -164,7 +158,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
             accused.official_position = etOfficial_position.getText().toString();
             accused.phone = etPhoneCommon.getText().toString();
 
-            id_accused = (int) CursachDatabase.getInstance(getApplicationContext()).accusedDao().insertAll(accused)[0];
+            id_accused = (int) ProgDatabase.getInstance(getApplicationContext()).accusedDao().insertAll(accused)[0];
 
             Qualification_of_crime qualification_of_crime = new Qualification_of_crime();
             qualification_of_crime.article = etArticle.getText().toString();
@@ -172,7 +166,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
             qualification_of_crime.part = etPart.getText().toString();
             qualification_of_crime.item = etItem.getText().toString();
 
-            id_qualification_of_crime = (int) CursachDatabase.getInstance(getApplicationContext()).qualification_of_crimeDao().insertAll(qualification_of_crime)[0];
+            id_qualification_of_crime = (int) ProgDatabase.getInstance(getApplicationContext()).qualification_of_crimeDao().insertAll(qualification_of_crime)[0];
 
             Crime crime = new Crime();
             crime.number_of_criminal_case = etNumber_of_criminal_case.getText().toString();
@@ -184,7 +178,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
             crime.id_focus_category = id_focus_category;
             crime.id_damage_category = id_damage_category;
 
-            id_crime = (int) CursachDatabase.getInstance(getApplicationContext()).crimeDao().insertAll(crime)[0];
+            id_crime = (int) ProgDatabase.getInstance(getApplicationContext()).crimeDao().insertAll(crime)[0];
 
             Participants_in_crime participants_in_crime = new Participants_in_crime();
             participants_in_crime.id_crime = id_crime;
@@ -192,7 +186,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
             participants_in_crime.id_conviction = id_conviction;
             participants_in_crime.id_condition_of_committing = id_condition_of_committing;
 
-            CursachDatabase.getInstance(getApplicationContext()).participants_in_crimeDao().insertAll(participants_in_crime);
+            ProgDatabase.getInstance(getApplicationContext()).participants_in_crimeDao().insertAll(participants_in_crime);
 
         }).start();
     }
@@ -218,7 +212,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
 
     private void createStatementSpinner() {
         new Thread(() -> {
-            List<Statement> statementList = CursachDatabase.getInstance(getApplicationContext()).statementDao().getAll();
+            List<Statement> statementList = ProgDatabase.getInstance(getApplicationContext()).statementDao().getAll();
             String[] strings = new String[statementList.size()];
             for (int i = 0; i < strings.length; i++) {
                 strings[i] = statementList.get(i).id_statement + ", " + statementList.get(i).additional_information;
@@ -247,7 +241,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
 
     private void createOrgan_EmployeeSpinner() {
         new Thread(() -> {
-            List<Organ_employee> organ_employees = CursachDatabase.getInstance(getApplicationContext()).organ_employeeDao().getAll();
+            List<Organ_employee> organ_employees = ProgDatabase.getInstance(getApplicationContext()).organ_employeeDao().getAll();
             String[] strings = new String[organ_employees.size()];
             for (int i = 0; i < strings.length; i++) {
                 strings[i] = organ_employees.get(i).id_organ_employee + ", " + organ_employees.get(i).lastname  + ", " + organ_employees.get(i).firstname  + ", " + organ_employees.get(i).middle_name;
@@ -276,7 +270,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
 
     private void createCourtSpinner() {
         new Thread(() -> {
-            List<Court> courts = CursachDatabase.getInstance(getApplicationContext()).courtDao().getAll();
+            List<Court> courts = ProgDatabase.getInstance(getApplicationContext()).courtDao().getAll();
             String[] strings = new String[courts.size()];
             for (int i = 0; i < strings.length; i++) {
                 strings[i] = courts.get(i).id_court + ", " + courts.get(i).title;
@@ -305,7 +299,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
 
     private void createJudgeSpinner() {
         new Thread(() -> {
-            List<Judge> judges = CursachDatabase.getInstance(getApplicationContext()).judgeDao().getAll();
+            List<Judge> judges = ProgDatabase.getInstance(getApplicationContext()).judgeDao().getAll();
             String[] strings = new String[judges.size()];
             for (int i = 0; i < strings.length; i++) {
                 strings[i] = judges.get(i).id_judge + ", " + judges.get(i).lastname  + ", " + judges.get(i).firstname  + ", " + judges.get(i).middle_name;
@@ -334,7 +328,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
 
     private void createType_of_groupSpinner() {
         new Thread(() -> {
-            List<Group_of_persons_directory> group_of_persons_directories = CursachDatabase.getInstance(getApplicationContext()).group_of_persons_directoryDao().getAll();
+            List<Group_of_persons_directory> group_of_persons_directories = ProgDatabase.getInstance(getApplicationContext()).group_of_persons_directoryDao().getAll();
             String[] strings = new String[group_of_persons_directories.size()];
             for (int i = 0; i < strings.length; i++) {
                 strings[i] = group_of_persons_directories.get(i).id_type_of_group + ", " + group_of_persons_directories.get(i).structure;
@@ -363,7 +357,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
 
     private void createCategory_of_crimesSpinner() {
         new Thread(() -> {
-            List<Category_of_crimes> category_of_crimes = CursachDatabase.getInstance(getApplicationContext()).category_of_crimesDao().getAll();
+            List<Category_of_crimes> category_of_crimes = ProgDatabase.getInstance(getApplicationContext()).category_of_crimesDao().getAll();
             String[] strings = new String[category_of_crimes.size()];
             for (int i = 0; i < strings.length; i++) {
                 strings[i] = category_of_crimes.get(i).id_category_of_crimes + ", " + category_of_crimes.get(i).category;
@@ -392,7 +386,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
 
     private void createFocus_categorySpinner() {
         new Thread(() -> {
-            List<Focus_category> focus_categories = CursachDatabase.getInstance(getApplicationContext()).focus_categoryDao().getAll();
+            List<Focus_category> focus_categories = ProgDatabase.getInstance(getApplicationContext()).focus_categoryDao().getAll();
             String[] strings = new String[focus_categories.size()];
             for (int i = 0; i < strings.length; i++) {
                 strings[i] = focus_categories.get(i).id_focus_category + ", " + focus_categories.get(i).type_of_focus;
@@ -421,7 +415,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
 
     private void createDamage_categorySpinner() {
         new Thread(() -> {
-            List<Damage_category> damage_categories = CursachDatabase.getInstance(getApplicationContext()).damage_categoryDao().getAll();
+            List<Damage_category> damage_categories = ProgDatabase.getInstance(getApplicationContext()).damage_categoryDao().getAll();
             String[] strings = new String[damage_categories.size()];
             for (int i = 0; i < strings.length; i++) {
                 strings[i] = damage_categories.get(i).id_damage_category + ", " + damage_categories.get(i).type_of_damage;
@@ -450,7 +444,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
 
     private void createConvictionSpinner() {
         new Thread(() -> {
-            List<Reference_previously_convicted> reference_previously_convicteds = CursachDatabase.getInstance(getApplicationContext()).reference_previously_convictedDao().getAll();
+            List<Reference_previously_convicted> reference_previously_convicteds = ProgDatabase.getInstance(getApplicationContext()).reference_previously_convictedDao().getAll();
             String[] strings = new String[reference_previously_convicteds.size()];
             for (int i = 0; i < strings.length; i++) {
                 strings[i] = reference_previously_convicteds.get(i).id_conviction + ", " + reference_previously_convicteds.get(i).condition;
@@ -479,7 +473,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
 
     private void createCondition_of_committingSpinner() {
         new Thread(() -> {
-            List<Condition_of_committing> condition_of_committings = CursachDatabase.getInstance(getApplicationContext()).condition_of_committingDao().getAll();
+            List<Condition_of_committing> condition_of_committings = ProgDatabase.getInstance(getApplicationContext()).condition_of_committingDao().getAll();
             String[] strings = new String[condition_of_committings.size()];
             for (int i = 0; i < strings.length; i++) {
                 strings[i] = condition_of_committings.get(i).id_condition_of_committing + ", " + condition_of_committings.get(i).condition;

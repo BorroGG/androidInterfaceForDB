@@ -13,12 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.Judge;
-import com.example.testproject.db.entities.Organ_employee;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Victim;
-
-import org.mindrot.jbcrypt.BCrypt;
 
 public class CurrentVictimActivity extends AppCompatActivity {
 
@@ -97,7 +93,7 @@ public class CurrentVictimActivity extends AppCompatActivity {
 
                     currentVictim = victim;
 
-                    CursachDatabase.getInstance(getApplicationContext()).victimDao().update(victim);
+                    ProgDatabase.getInstance(getApplicationContext()).victimDao().update(victim);
                 });
                 thread.start();
                 try {
@@ -111,7 +107,7 @@ public class CurrentVictimActivity extends AppCompatActivity {
 
         });
         deleteVictim.setOnClickListener(v -> new Thread(() -> {
-            CursachDatabase.getInstance(getApplicationContext()).victimDao().delete(currentVictim);
+            ProgDatabase.getInstance(getApplicationContext()).victimDao().delete(currentVictim);
             Intent intent = new Intent(CurrentVictimActivity.this, VictimActivity.class);
             startActivity(intent);
         }).start());

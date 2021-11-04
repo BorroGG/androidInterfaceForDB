@@ -7,16 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.Judge;
-import com.example.testproject.db.entities.Organ_employee;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Victim;
 
 import java.util.ArrayList;
@@ -114,7 +110,7 @@ public class VictimActivity extends AppCompatActivity {
     }
 
     private synchronized Thread getAllVictim() {
-        Thread thread = new Thread(() -> victimList = CursachDatabase.getInstance(getApplicationContext()).victimDao().getAll());
+        Thread thread = new Thread(() -> victimList = ProgDatabase.getInstance(getApplicationContext()).victimDao().getAll());
         thread.start();
         return thread;
     }

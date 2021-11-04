@@ -13,11 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.Judge;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Accused;
-
-import org.mindrot.jbcrypt.BCrypt;
 
 public class CurrentAccusedActivity extends AppCompatActivity {
 
@@ -94,7 +91,7 @@ public class CurrentAccusedActivity extends AppCompatActivity {
 
                     currentAccused = accused;
 
-                    CursachDatabase.getInstance(getApplicationContext()).accusedDao().update(accused);
+                    ProgDatabase.getInstance(getApplicationContext()).accusedDao().update(accused);
                 });
                 thread.start();
                 try {
@@ -108,7 +105,7 @@ public class CurrentAccusedActivity extends AppCompatActivity {
 
         });
         deleteAccused.setOnClickListener(v -> new Thread(() -> {
-            CursachDatabase.getInstance(getApplicationContext()).accusedDao().delete(currentAccused);
+            ProgDatabase.getInstance(getApplicationContext()).accusedDao().delete(currentAccused);
             Intent intent = new Intent(CurrentAccusedActivity.this, AccusedActivity.class);
             startActivity(intent);
         }).start());

@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Sentence;
-import com.example.testproject.db.entities.Statement;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -49,8 +48,8 @@ public class CurrentPeriodSentenceActivity extends AppCompatActivity {
 
     private void setDate() {
         new Thread(() -> {
-            String s1 = CursachDatabase.getInstance(getApplicationContext()).sentenceDao().getDate_Of_Issue(currentSentence.id_sentence).substring(0, 10);
-            String s2 = CursachDatabase.getInstance(getApplicationContext()).statementDao().getRegistration_date(currentSentence.id_sentence);
+            String s1 = ProgDatabase.getInstance(getApplicationContext()).sentenceDao().getDate_Of_Issue(currentSentence.id_sentence).substring(0, 10);
+            String s2 = ProgDatabase.getInstance(getApplicationContext()).statementDao().getRegistration_date(currentSentence.id_sentence);
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date1 = null;
             Date date2 = null;

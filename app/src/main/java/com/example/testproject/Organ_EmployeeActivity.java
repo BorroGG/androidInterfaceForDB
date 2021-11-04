@@ -7,17 +7,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.ContextThemeWrapper;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.Judge;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Organ_employee;
-import com.example.testproject.db.entities.Victim;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +97,7 @@ public class Organ_EmployeeActivity extends AppCompatActivity {
     }
 
     private synchronized Thread getAllOrganEmployee() {
-        Thread thread = new Thread(() -> organ_employees = CursachDatabase.getInstance(getApplicationContext()).organ_employeeDao().getAll());
+        Thread thread = new Thread(() -> organ_employees = ProgDatabase.getInstance(getApplicationContext()).organ_employeeDao().getAll());
         thread.start();
         return thread;
     }

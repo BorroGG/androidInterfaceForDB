@@ -4,14 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.testproject.db.CursachDatabase;
+
 import com.example.testproject.db.entities.Organ_employee;
 
 public class CurrentOrganEmployeeActivity extends AppCompatActivity {

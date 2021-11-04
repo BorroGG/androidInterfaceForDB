@@ -13,9 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Statement;
-import com.example.testproject.db.entities.Victim;
 
 public class CurrentStatementActivity extends AppCompatActivity {
 
@@ -83,7 +82,7 @@ public class CurrentStatementActivity extends AppCompatActivity {
 
                     currentStatement = statement;
 
-                    CursachDatabase.getInstance(getApplicationContext()).statementDao().update(statement);
+                    ProgDatabase.getInstance(getApplicationContext()).statementDao().update(statement);
                 });
                 thread.start();
                 try {
@@ -97,7 +96,7 @@ public class CurrentStatementActivity extends AppCompatActivity {
 
         });
         deleteStatement.setOnClickListener(v -> new Thread(() -> {
-            CursachDatabase.getInstance(getApplicationContext()).statementDao().delete(currentStatement);
+            ProgDatabase.getInstance(getApplicationContext()).statementDao().delete(currentStatement);
             Intent intent = new Intent(CurrentStatementActivity.this, VictimActivity.class);
             startActivity(intent);
         }).start());

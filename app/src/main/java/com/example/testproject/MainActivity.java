@@ -12,8 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.Accused;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Judge;
 import com.example.testproject.db.entities.Organ_employee;
 
@@ -25,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button btnEnter, btnReg;
     EditText etLogin, etPass;
-    CursachDatabase db;
+    ProgDatabase db;
     String[] roles = {"Войти как администратор", "Войти как сотрудник", "Войти как судья"};
 
     @Override
@@ -61,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        db = CursachDatabase.getInstance(getApplicationContext());
+        db = ProgDatabase.getInstance(getApplicationContext());
 
     }
 
@@ -85,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void checkData(String login, String pass) {
         Thread thread = new Thread(() -> {
             if (UserData.ROLE_ID == 0 || UserData.ROLE_ID == 1) {
-                List<Organ_employee> organ_employees = CursachDatabase.getInstance(getApplicationContext()).organ_employeeDao().getAll();
+                List<Organ_employee> organ_employees = ProgDatabase.getInstance(getApplicationContext()).organ_employeeDao().getAll();
                 for (Organ_employee organ_employee : organ_employees) {
                     if (login.equals(organ_employee.login) && BCrypt.checkpw(pass, organ_employee.password)) {
                         if ((UserData.ROLE_ID == 0 && organ_employee.position.equals("Администратор")) || UserData.ROLE_ID == 1) {
@@ -98,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
             } else {
-                List<Judge> listSingle = CursachDatabase.getInstance(getApplicationContext()).judgeDao().getAll();
+                List<Judge> listSingle = ProgDatabase.getInstance(getApplicationContext()).judgeDao().getAll();
                 for (Judge judge : listSingle) {
                     if (login.equals(judge.login) && BCrypt.checkpw(pass, judge.password)) {
                         UserData.CURRENT_USER_JUDGE = judge;

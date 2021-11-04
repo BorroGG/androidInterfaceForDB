@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Sentence;
 
 import java.util.ArrayList;
@@ -98,7 +98,7 @@ public class PeriodSentenceActivity extends AppCompatActivity {
 
     private synchronized Thread getAllSentence() {
         Thread thread = new Thread(() -> {
-            sentenceList = CursachDatabase.getInstance(getApplicationContext()).sentenceDao().getAll();
+            sentenceList = ProgDatabase.getInstance(getApplicationContext()).sentenceDao().getAll();
             if (UserData.ROLE_ID == 2) {
                 List<Sentence> sentences = new ArrayList<>();
                 for (int i = 0; i < sentenceList.size(); i++) {

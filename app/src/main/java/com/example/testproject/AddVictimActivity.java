@@ -11,22 +11,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.Judge;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.Log;
-import com.example.testproject.db.entities.Organ_employee;
 import com.example.testproject.db.entities.Victim;
 
-import org.mindrot.jbcrypt.BCrypt;
-
-import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDate;
 
 public class AddVictimActivity extends AppCompatActivity {
 
@@ -88,8 +80,8 @@ public class AddVictimActivity extends AppCompatActivity {
             victim.official_position = etOfficial_position.getText().toString();
             victim.phone = etPhoneCommon.getText().toString();
 
-            CursachDatabase.getInstance(getApplicationContext()).victimDao().insertAll(victim);
-            CursachDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", Instant.now().toString(),  Instant.now().toString(), android.os.Build.MODEL, "Add victim in db"));
+            ProgDatabase.getInstance(getApplicationContext()).victimDao().insertAll(victim);
+            ProgDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", Instant.now().toString(),  Instant.now().toString(), android.os.Build.MODEL, "Add victim in db"));
         }).start();
     }
 

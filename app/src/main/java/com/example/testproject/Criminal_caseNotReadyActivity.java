@@ -12,8 +12,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.testproject.db.CursachDatabase;
-import com.example.testproject.db.entities.CustomEntityForCriminal_case;
+import com.example.testproject.db.ProgDatabase;
 import com.example.testproject.db.entities.EntityForCriminal_caseAndJudge;
 
 import java.util.ArrayList;
@@ -110,7 +109,7 @@ public class Criminal_caseNotReadyActivity extends AppCompatActivity {
 
     private synchronized Thread getAllCriminal_case() {
         Thread thread = new Thread(() -> {
-            customEntities = CursachDatabase.getInstance(getApplicationContext()).criminal_caseDao().getAllWithJudgeAndNotComplete();
+            customEntities = ProgDatabase.getInstance(getApplicationContext()).criminal_caseDao().getAllWithJudgeAndNotComplete();
             if (UserData.ROLE_ID == 2) {
                 List<EntityForCriminal_caseAndJudge> customEntitiesTemp = new ArrayList<>();
                 for (int i = 0; i < customEntities.size(); i++) {
