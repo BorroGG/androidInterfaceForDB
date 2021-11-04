@@ -25,4 +25,7 @@ public class UserData {
         return createYOU_LOG_AS();
     }
 
+    public static String getLogin() {
+        return UserData.ROLE_ID == 2 ? UserData.CURRENT_USER_JUDGE.login : UserData.CURRENT_USER_EMPL.login;
+    }
 }

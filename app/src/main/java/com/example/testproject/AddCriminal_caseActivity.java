@@ -1,9 +1,11 @@
 package com.example.testproject;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Transaction;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,6 +29,7 @@ import com.example.testproject.db.entities.Focus_category;
 import com.example.testproject.db.entities.Group_of_persons_directory;
 import com.example.testproject.db.entities.Judge;
 import com.example.testproject.db.entities.Criminal_case;
+import com.example.testproject.db.entities.Log;
 import com.example.testproject.db.entities.Organ_employee;
 import com.example.testproject.db.entities.Participants_in_crime;
 import com.example.testproject.db.entities.Qualification_of_crime;
@@ -35,6 +38,8 @@ import com.example.testproject.db.entities.Statement;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 public class AddCriminal_caseActivity extends AppCompatActivity {
@@ -56,6 +61,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
 
     int id_criminal_case, id_qualification_of_crime, id_crime, id_accused;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,6 +137,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
         id_condition_of_committingSpinner = findViewById(R.id.id_condition_of_committing);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Transaction
     private void insertCriminal_case() {
         new Thread(() -> {
@@ -143,6 +150,7 @@ public class AddCriminal_caseActivity extends AppCompatActivity {
             criminal_case.id_judge = idJudge;
 
             id_criminal_case = (int) CursachDatabase.getInstance(getApplicationContext()).criminal_caseDao().insertAll(criminal_case)[0];
+            CursachDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", UserData.getLogin(), Instant.now().toString(), android.os.Build.MODEL, "Add criminal case in db"));
 
             Accused accused = new Accused();
             accused.lastname = etSurname.getText().toString();

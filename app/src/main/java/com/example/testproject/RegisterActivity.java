@@ -1,6 +1,7 @@
 package com.example.testproject;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -10,16 +11,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.testproject.db.CursachDatabase;
 import com.example.testproject.db.entities.Department;
 import com.example.testproject.db.entities.Judge;
+import com.example.testproject.db.entities.Log;
 import com.example.testproject.db.entities.Organ;
 import com.example.testproject.db.entities.Organ_employee;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -34,6 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
     int idOrgan;
     int idDepartment;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +168,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void insertEmployee() {
         Thread thread = new Thread(() -> {
             Organ_employee organ_employee = new Organ_employee();
@@ -178,11 +185,13 @@ public class RegisterActivity extends AppCompatActivity {
                 organ_employee.id_organ = idOrgan;
                 organ_employee.id_organ_employee = etIdUser.getText().toString();
                 CursachDatabase.getInstance(getApplicationContext()).organ_employeeDao().insert(organ_employee);
+                CursachDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", organ_employee.login, Instant.now().toString(), android.os.Build.MODEL, "Add new employee in db"));
             }
         });
         thread.start();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void insertJudge() {
         new Thread(() -> {
             Judge judge = new Judge();
@@ -193,6 +202,7 @@ public class RegisterActivity extends AppCompatActivity {
             judge.password = BCrypt.hashpw(etPass.getText().toString(), BCrypt.gensalt());
             judge.id_judge = etIdUser.getText().toString();
             CursachDatabase.getInstance(getApplicationContext()).judgeDao().insert(judge);
+            CursachDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", judge.login, Instant.now().toString(), android.os.Build.MODEL, "Add new judge in db"));
         }).start();
     }
 

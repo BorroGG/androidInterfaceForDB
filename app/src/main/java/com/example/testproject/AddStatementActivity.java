@@ -1,8 +1,10 @@
 package com.example.testproject;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,10 +16,13 @@ import android.widget.TextView;
 
 import com.example.testproject.db.CursachDatabase;
 import com.example.testproject.db.entities.Department;
+import com.example.testproject.db.entities.Log;
 import com.example.testproject.db.entities.Organ_employee;
 import com.example.testproject.db.entities.Statement;
 import com.example.testproject.db.entities.Victim;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.List;
 
 public class AddStatementActivity extends AppCompatActivity {
@@ -29,6 +34,7 @@ public class AddStatementActivity extends AppCompatActivity {
     TextView tvUserName, tvExit;
     int id_victim;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +65,7 @@ public class AddStatementActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void insertVictim() {
         new Thread(() -> {
             Statement statement = new Statement();
@@ -69,6 +76,7 @@ public class AddStatementActivity extends AppCompatActivity {
             statement.id_organ_employee = UserData.CURRENT_USER_EMPL.id_organ_employee + "";
 
             CursachDatabase.getInstance(getApplicationContext()).statementDao().insertAll(statement);
+            CursachDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", UserData.getLogin(), Instant.now().toString(), android.os.Build.MODEL, "Add statement in db"));
         }).start();
     }
 

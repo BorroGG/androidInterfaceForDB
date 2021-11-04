@@ -1,8 +1,10 @@
 package com.example.testproject;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,9 +16,12 @@ import android.widget.TextView;
 
 import com.example.testproject.db.CursachDatabase;
 import com.example.testproject.db.entities.Criminal_case;
+import com.example.testproject.db.entities.Log;
 import com.example.testproject.db.entities.Sentence;
 import com.example.testproject.db.entities.Victim;
 
+import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,6 +35,7 @@ public class AddSentenceActivity extends AppCompatActivity {
     Spinner spinnerIdSentenceAndIdCases;
     int idSentence;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +64,7 @@ public class AddSentenceActivity extends AppCompatActivity {
         createIdSpinner();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     private void insertSentence() {
         new Thread(() -> {
             Sentence sentence = new Sentence();
@@ -67,6 +74,7 @@ public class AddSentenceActivity extends AppCompatActivity {
             sentence.id_judge = (UserData.ROLE_ID == 2 ? UserData.CURRENT_USER_JUDGE.id_judge : "0");
 
             CursachDatabase.getInstance(getApplicationContext()).sentenceDao().insertAll(sentence);
+            CursachDatabase.getInstance(getApplicationContext()).logDao().insertAll(new Log("INFO", UserData.getLogin(), Instant.now().toString(), android.os.Build.MODEL, "Add sentence in db"));
         }).start();
     }
 

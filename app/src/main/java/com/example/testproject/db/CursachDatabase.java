@@ -20,6 +20,7 @@ import com.example.testproject.db.dao.DepartmentDao;
 import com.example.testproject.db.dao.Focus_categoryDao;
 import com.example.testproject.db.dao.Group_of_persons_directoryDao;
 import com.example.testproject.db.dao.JudgeDao;
+import com.example.testproject.db.dao.LogDao;
 import com.example.testproject.db.dao.OrganDao;
 import com.example.testproject.db.dao.Organ_employeeDao;
 import com.example.testproject.db.dao.Participants_in_crimeDao;
@@ -39,6 +40,7 @@ import com.example.testproject.db.entities.Department;
 import com.example.testproject.db.entities.Focus_category;
 import com.example.testproject.db.entities.Group_of_persons_directory;
 import com.example.testproject.db.entities.Judge;
+import com.example.testproject.db.entities.Log;
 import com.example.testproject.db.entities.Organ;
 import com.example.testproject.db.entities.Organ_employee;
 import com.example.testproject.db.entities.Participants_in_crime;
@@ -52,7 +54,7 @@ import com.example.testproject.db.entities.Victim;
         Court.class, Crime.class, Criminal_case.class, Damage_category.class, Department.class,
         Focus_category.class, Group_of_persons_directory.class, Judge.class, Organ.class,
         Organ_employee.class, Participants_in_crime.class, Qualification_of_crime.class,
-        Reference_previously_convicted.class, Sentence.class, Statement.class, Victim.class}, version = 1)
+        Reference_previously_convicted.class, Sentence.class, Statement.class, Victim.class, Log.class}, version = 1)
 public abstract class CursachDatabase extends RoomDatabase {
 
     public abstract AccusedDao accusedDao();
@@ -75,6 +77,7 @@ public abstract class CursachDatabase extends RoomDatabase {
     public abstract Participants_in_crimeDao participants_in_crimeDao();
     public abstract DepartmentDao departmentDao();
     public abstract CustomEntityDao customEntityDao();
+    public abstract LogDao logDao();
 
     private static volatile CursachDatabase INSTANCE;
 
@@ -93,7 +96,7 @@ public abstract class CursachDatabase extends RoomDatabase {
 
                     INSTANCE = Room
                             .databaseBuilder(context.getApplicationContext(),
-                                    CursachDatabase.class, "cursach_db7")
+                                    CursachDatabase.class, "db9")
                             .addCallback(rdc)
                             .build();
                 }
